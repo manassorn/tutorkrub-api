@@ -6,8 +6,13 @@ var api = require('./api')
 var s3 = require('../services/s3.service')
 
 /* GET users listing. */
-router.get('/:collection', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/:collection', async function(req, res, next) {
+  try {
+    const data = await crudController.read(req.params.collection)
+    api.responseOk(res, data)
+  } catch (e) {
+    next(e)
+  }
 });
 router.post('/:collection', function(req, res, next) {
   crudController.create(req.params.collection, req.body)

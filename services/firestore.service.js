@@ -20,3 +20,7 @@ module.exports.create = (collection, payload) => {
 module.exports.update = (collection, id, payload) => {
     return firestore.collection(collection).doc(id).update(payload)
 }
+
+module.exports.read = () => {
+  
+}

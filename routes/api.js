@@ -1,8 +1,9 @@
 
 
-module.exports.responseOk = (res) => {
+module.exports.responseOk = (res, data) => {
+    data = data || {}
     res.json({
-        data: {}
+        data: data
     })
 }
 module.exports.responseError = (res, message) => {
