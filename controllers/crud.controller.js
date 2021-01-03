@@ -9,6 +9,6 @@ module.exports.update = (collection, id, payload) => {
 }
 
 module.exports.read = async (collection) => {
-  const snapshot = await firebase.firestore().collection(collection).get()
+  const snapshot = await firestore.read(collection)
   return snapshot.docs.map(doc => doc.data());
 }
