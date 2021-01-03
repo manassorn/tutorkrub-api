@@ -1,8 +1,10 @@
 const S3 = require('aws-sdk/clients/s3')
 
-const accessKeyId = 'AKIAQCI45EUQHELA7OXH'
-const secretAccessKey = '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'
-const bucketName = 'hiscoretutor'
+const conf = require('../conf/s3.conf')
+
+const accessKeyId = conf.accessKeyId
+const secretAccessKey = conf.secretAccessKey
+const bucketName = conf.bucketName
 
 
 module.exports.upload = (fileName, fileData) => {
