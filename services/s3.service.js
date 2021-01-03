@@ -1,6 +1,6 @@
 const S3 = require('aws-sdk/clients/s3')
 
-const conf = require('../conf/s3.conf')
+const conf = require('../conf/s3.json')
 
 const accessKeyId = conf.accessKeyId
 const secretAccessKey = conf.secretAccessKey
