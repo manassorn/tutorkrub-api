@@ -7,7 +7,7 @@ sgMail.setApiKey(conf.apiKey);
 module.exports.send = async (to,subject,text) => {
   const msg = {
     to: to,
-    from: 'test@example.com', // Use the email address or domain you verified above
+    from: 'hello@hiscoretutor.com', // Use the email address or domain you verified above
     subject: subject,
     text: text,
   };
