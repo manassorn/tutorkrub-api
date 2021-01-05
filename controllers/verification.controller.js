@@ -1,12 +1,12 @@
-var firestore = require('../services/firestore.service')
+var crudController = require('./crud.controller')
 var sendgrid = require('../services/sendgrid.service')
 
 
-module.exports.verifyEmail = (email) => {
+module.exports.verifyEmail = async (email) => {
   const random = Math.floor(Math.random() * 100000)
   const payload = {email,random}
   crudController.create('verification', payload)
-  await sendgrid.send(email, 'test', 'test: ')
+  await sendgrid.send(email, 'test', 'test: ' + random)
 }
 
 module.exports.update = (collection, id, payload) => {
@@ -15,6 +15,5 @@ module.exports.update = (collection, id, payload) => {
 
 module.exports.read = async (collection) => {
   const data = await firestore.read(collection)
-  await sendgrid.send('manassorn@gmail.com', 'test', 'test')
   return data;
 }

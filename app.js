@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var crudRouter = require('./routes/crud');
 var uploadRouter = require('./routes/upload');
+var verificationRouter = require('./routes/verification');
 
 var app = express();
 
@@ -24,5 +25,6 @@ app.use('/', indexRouter);
 app.use('/api/user', usersRouter);
 app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
+app.use('/api/verification', verificationRouter);
 
 module.exports = app;
