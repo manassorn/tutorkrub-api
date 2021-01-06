@@ -1,5 +1,6 @@
 var crudController = require('./crud.controller')
 var sendgrid = require('../services/sendgrid.service')
+var firestore = require('../services/firestore.service')
 
 
 module.exports.createForEmail = async (email) => {
