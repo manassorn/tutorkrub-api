@@ -11,6 +11,7 @@ module.exports.createForEmail = async (email) => {
 }
 
 module.exports.verifyForEmail = async (email, code) => {
+    code = parseInt(code)
   console.log(email,code)
   const snapshot = await firestore.firestore.collection('verification').where('email', '==', email).where('code', '==', code).get()
   console.log(snapshot.docs.length)
