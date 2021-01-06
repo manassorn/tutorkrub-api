@@ -12,6 +12,5 @@ module.exports.update = (collection, id, payload) => {
 
 module.exports.read = async (collection) => {
   const data = await firestore.read(collection)
-  await sendgrid.send('manassorn@gmail.com','test','test')
   return data;
 }
