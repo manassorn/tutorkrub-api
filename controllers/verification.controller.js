@@ -11,6 +11,6 @@ module.exports.createForEmail = async (email) => {
 }
 
 module.exports.verifyForEmail = async (email, code) => {
-  const snapshot = await firestore.collection('verification').where('email', '==', email).where('code', '==', code).get()
+  const snapshot = await firestore.firestore.collection('verification').where('email', '==', email).where('code', '==', code).get()
   return snapshot.docs.map(doc => doc.data()).length != 0;
 }
