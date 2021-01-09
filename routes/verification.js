@@ -6,6 +6,11 @@ var api = require('./api')
 
 router.post('/email/create', async function(req, res, next) {
   try {
+    const exist = await verificationController.checkExistingEmail(req.body.email)
+    if(exist) {
+      api.responseError(res, "email is existing")
+      return
+    }
     await verificationController.createForEmail(req.body.email)
     api.responseOk(res)
   } catch (e) {
