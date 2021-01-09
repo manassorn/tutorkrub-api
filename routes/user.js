@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
   if(verificationController.verifyForEmail(req.body.email, req.body.code)) {
     const payload = {
       email: req.body.email,
