@@ -4,6 +4,7 @@ var router = express.Router();
 var api = require('./api')
 var verificationController = require('../controllers/verification.controller')
 var crudController = require('../controllers/crud.controller')
+var userController = require('../controllers/user.controller')
 
 router.post('/', async(req, res, next) => {
   var passed = await verificationController.verifyForEmail(req.body.email, req.body.code)
@@ -18,6 +19,15 @@ router.post('/', async(req, res, next) => {
   }
   await crudController.create('user', payload)
   api.responseOk(res)
+});
+
+router.post('/login', async (req, res, next) => {
+  const success = await userController.login(req.body.email, req.body.password)    
+  if (success) {
+      api.responseOk(res)
+  } else {
+    api.responseError(res, 'login not success')
+  }
 });
 
 module.exports = router;
