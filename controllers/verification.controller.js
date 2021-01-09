@@ -12,7 +12,7 @@ module.exports.createForEmail = async (email) => {
   const random = Math.floor(100000 + Math.random() * 900000)
   const payload = {email,code:random}
   crudController.create('verification', payload)
-  await sendgrid.send(email, 'test', 'test: ' + random)
+  //await sendgrid.send(email, 'test', 'test: ' + random)
 }
 
 module.exports.verifyForEmail = async (email, code) => {
