@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var verificationController = require('../controllers/verification.controller')
+
 router.post('/', function(req, res, next) {
   if(verificationController.verifyForEmail(req.body.email, req.body.code)) {
     const payload = {
