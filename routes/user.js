@@ -6,7 +6,8 @@ router.get('/', function(req, res, next) {
   if(verificationController.verifyForEmail(req.body.email, req.body.code)) {
     const payload = {
       email: req.body.email,
-      name: req.body.
+      name: req.body.name,
+      password: req.body.password
     }
     crud.create('user', payload)
   }
