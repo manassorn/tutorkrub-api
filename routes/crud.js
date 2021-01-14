@@ -14,6 +14,14 @@ router.get('/:collection', async function(req, res, next) {
     next(e)
   }
 });
+router.get('/:collection/:id', async function(req, res, next) {
+  try {
+    const data = await crudController.readById(req.params.collection, req.params.id)
+    api.responseOk(res, data)
+  } catch (e) {
+    next(e)
+  }
+});
 router.post('/:collection', function(req, res, next) {
   crudController.create(req.params.collection, req.body)
   api.responseOk(res)

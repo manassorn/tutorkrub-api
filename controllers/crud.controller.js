@@ -14,3 +14,8 @@ module.exports.read = async (collection) => {
   const data = await firestore.read(collection)
   return data;
 }
+
+module.exports.readById = async (collection, id) => {
+  const data = await firestore.readById(collection, id)
+  return data;
+}
