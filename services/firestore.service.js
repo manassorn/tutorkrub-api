@@ -23,5 +23,9 @@ module.exports.update = (collection, id, payload) => {
 
 module.exports.read = async (collection) => {
   const snapshot = await firestore.collection(collection).get()
-  return snapshot.docs.map(doc => doc.data());
+  return snapshot.docs.map(doc => {
+    const id = doc.id
+    const data = doc.data()
+    return {id, ...data}
+  });
 };
