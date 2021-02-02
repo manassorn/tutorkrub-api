@@ -30,4 +30,16 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+
+router.post('/:id/password', async (req, res, next) => {
+  const success = await userController.login(req.body.email, req.body.password)
+  const user = await crudController.readById('user', req.params.id)
+  if (user.password == req.body.oldPassword) {
+    crudController.update('user', req.params.id, {password: req.body.newPassword})
+    api.responseOk(res)
+  } else {
+    api.responseError(res, 'current password is incorrect')
+  }
+});
+
 module.exports = router;
