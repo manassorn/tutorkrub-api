@@ -33,6 +33,8 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/:id/password', async (req, res, next) => {
   const user = await crudController.readById('user', req.params.id)
+  console.log('user.password',user.password)
+  console.log('req.body.currentPassword',req.body.currentPassword)
   if (user.password == req.body.currentPassword) {
     crudController.update('user', req.params.id, {password: req.body.newPassword})
     api.responseOk(res)
