@@ -6,8 +6,15 @@ module.exports.responseOk = (res, data) => {
         data: data
     })
 }
-module.exports.responseError = (res, code = 200, message) => {
+module.exports.responseError = (res, message) => {
     res.status(code).json({
+        error: {
+            message: message
+        }
+    })
+}
+module.exports.responseError400 = (res, message) => {
+    res.status(400).json({
         error: {
             message: message
         }

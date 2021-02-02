@@ -39,7 +39,7 @@ router.post('/:id/password', async (req, res, next) => {
     crudController.update('user', req.params.id, {password: req.body.newPassword})
     api.responseOk(res)
   } else {
-    api.responseError(res, 'current password is incorrect')
+    api.responseError400(res, 'current password is incorrect')
   }
 });
 
