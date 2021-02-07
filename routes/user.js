@@ -43,4 +43,19 @@ router.post('/:id/password', async (req, res, next) => {
   }
 });
 
+
+router.post('/:id/email', async (req, res, next) => {
+  var passed = await verificationController.verifyForEmail(req.body.email, req.body.code)
+  if (passed === false) {
+    api.responseError('code is incorrect')
+    return false
+  }
+  const payload = {
+    email: req.body.email
+  }
+  await crudController.update('user', req.params.id, payload)
+  api.responseOk(res)
+});
+
+
 module.exports = router;
