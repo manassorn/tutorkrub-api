@@ -30,7 +30,7 @@ router.post('/email/edit', async function(req, res, next) {
 
 router.post('/email/verify', async function(req, res, next) {
   try {
-    const verifyPassed = await verificationController.verifyForEmail(req.body.ema GGil, req.body.code)
+    const verifyPassed = await verificationController.verifyForEmail(req.body.email, req.body.code)
     api.responseOk(res, {verifyPassed})
   } catch (e) {
     next(e)
