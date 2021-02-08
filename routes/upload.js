@@ -29,6 +29,15 @@ router.post('/then/update/:collection/:id', upload.single('file'), function(req,
   api.responseOk(res)
 });
 
+router.post('/to/:collection/:id/:field', upload.single('file'), function(req, res, next) {
+  upload2(req.file.buffer).then((url) => {
+    const payload = req.body.payload || {};
+    payload[req.params.field] = url
+    crudController.update(req.params.collection, req.params.id, payload)
+  })
+  api.responseOk(res)
+});
+
 function upload2(buffer) {
   return s3.upload(new Date().getTime() + ".png", buffer).then((sendData) => {
     return sendData.Location
