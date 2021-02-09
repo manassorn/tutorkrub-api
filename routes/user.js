@@ -60,7 +60,7 @@ router.post('/:id/email', async (req, res, next) => {
 router.get('/me', async (req, res, next) => {
   //var meId = req.sessions.meId
   const meId = 'hNqOKzYwhJjZTIDLUkf5'
-  const user = await crudController.getById('user', meId)
+  const user = await crudController.readById('user', meId)
   api.responseOk(res, user)
 });
 
