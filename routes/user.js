@@ -30,6 +30,11 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+router.post('/1clicklogin', async (req, res, next) => {
+  req.session.meId = 'hNqOKzYwhJjZTIDLUkf5'
+  api.responseOk(res)
+});
+
 
 router.post('/:id/password', async (req, res, next) => {
   const user = await crudController.readById('user', req.params.id)
@@ -47,7 +52,7 @@ router.post('/:id/password', async (req, res, next) => {
 router.post('/:id/email', async (req, res, next) => {
   var passed = await verificationController.verifyForEmail(req.body.email, req.body.code)
   if (passed === false) {
-    api.responseError('code is incorrect')
+    api.responseError(res,'code is incorrect')
     return false
   }
   const payload = {
@@ -59,9 +64,13 @@ router.post('/:id/email', async (req, res, next) => {
 
 router.get('/me', async (req, res, next) => {
   //var meId = req.sessions.meId
-  const meId = 'hNqOKzYwhJjZTIDLUkf5'
-  const user = await crudController.readById('user', meId)
-  api.responseOk(res, user)
+  if(req.session.meId) {
+    const meId = req.session.meId
+    const user = await crudController.readById('user', meId)
+    api.responseOk(res, user)
+  } else {
+    api.responseError(res, 'no auth')
+  }
 });
 
 module.exports = router;
