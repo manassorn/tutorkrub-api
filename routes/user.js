@@ -30,7 +30,7 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-router.post('/1clicklogin', async (req, res, next) => {
+router.get('/1clicklogin', async (req, res, next) => {
   req.session.meId = 'hNqOKzYwhJjZTIDLUkf5'
   api.responseOk(res)
 });
