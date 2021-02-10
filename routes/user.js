@@ -36,7 +36,7 @@ router.get('/1clicklogin', async (req, res, next) => {
 });
 
 router.post('/logout', async (req, res, next) => {
-  req.session.meId = undefined
+  req.session.meId = null
   api.responseOk(res)
 });
 
