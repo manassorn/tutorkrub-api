@@ -7,7 +7,7 @@ module.exports.responseOk = (res, data) => {
     })
 }
 module.exports.responseError = (res, message) => {
-    res.status(code).json({
+    res.json({
         error: {
             message: message
         }
