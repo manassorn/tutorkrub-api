@@ -35,6 +35,11 @@ router.post('/1clicklogin', async (req, res, next) => {
   api.responseOk(res)
 });
 
+router.post('/logout', async (req, res, next) => {
+  req.session.meId = undefined
+  api.responseOk(res)
+});
+
 
 router.post('/:id/password', async (req, res, next) => {
   const user = await crudController.readById('user', req.params.id)
