@@ -74,7 +74,7 @@ router.get('/me', async (req, res, next) => {
     const user = await crudController.readById('user', meId)
     api.responseOk(res, user)
   } else {
-    api.responseError(res,403, 'no auth')
+    api.responseError(res, 'no auth')
   }
 });
 
