@@ -28,6 +28,8 @@ app.use(cookieParser());
 
 var sess = {
   secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
   cookie: {}
 }
 if (app.get('env') === 'production') {
