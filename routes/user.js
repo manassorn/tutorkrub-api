@@ -69,6 +69,7 @@ router.post('/:id/email', async (req, res, next) => {
 
 router.get('/me', async (req, res, next) => {
   //var meId = req.sessions.meId
+  console.log(req.session.meId)
   if(req.session.meId) {
     const meId = req.session.meId
     const user = await crudController.readById('user', meId)
