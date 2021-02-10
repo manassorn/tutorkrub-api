@@ -25,7 +25,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({secret: "Shh, its a secret!"}));
+
+var sess = {
+  secret: 'keyboard cat',
+  cookie: {}
+}
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+  sess.cookie.secure = true // serve secure cookies
+}
+app.use(session(sess))
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
