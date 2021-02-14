@@ -35,6 +35,10 @@ router.get('/1clicklogin', async (req, res, next) => {
   api.responseOk(res)
 });
 
+router.get('/sessiin', async (req, res, next) => {
+  api.responseOk(res,req.session)
+});
+
 router.post('/logout', async (req, res, next) => {
   req.session.meId = null
   api.responseOk(res)
