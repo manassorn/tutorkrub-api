@@ -1,3 +1,8 @@
+const dotenv = require("dotenv");
+
+// get config vars
+dotenv.config();
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -6,6 +11,7 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/authen');
 var usersRouter = require('./routes/user');
 var crudRouter = require('./routes/crud');
 var uploadRouter = require('./routes/upload');
@@ -41,6 +47,7 @@ app.use(session(sess))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api/authen', authenRouter);
 app.use('/api/user', usersRouter);
 app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
