@@ -1,7 +1,8 @@
 const dotenv = require("dotenv");
+const path = require("path");
 
 // get config vars
-dotenv.config({ path: '/conf/.env' });
+dotenv.config({ path: path.resolve(process.cwd(), 'conf/.env') });
 
 var express = require('express');
 var path = require('path');
