@@ -11,7 +11,7 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/authen');
+var authenRouter = require('./routes/authen');
 var usersRouter = require('./routes/user');
 var crudRouter = require('./routes/crud');
 var uploadRouter = require('./routes/upload');
