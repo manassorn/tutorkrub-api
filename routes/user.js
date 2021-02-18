@@ -21,30 +21,6 @@ router.post('/', async(req, res, next) => {
   api.responseOk(res)
 });
 
-router.post('/login', async (req, res, next) => {
-  const success = await userController.login(req.body.email, req.body.password)    
-  if (success) {
-      api.responseOk(res)
-  } else {
-    api.responseError(res, 'login not success')
-  }
-});
-
-router.get('/1clicklogin', async (req, res, next) => {
-  req.session.meId = 'hNqOKzYwhJjZTIDLUkf5'
-  api.responseOk(res)
-});
-
-router.get('/sessiin', async (req, res, next) => {
-  api.responseOk(res,req.session)
-});
-
-router.post('/logout', async (req, res, next) => {
-  req.session.meId = null
-  api.responseOk(res)
-});
-
-
 router.post('/:id/password', async (req, res, next) => {
   const user = await crudController.readById('user', req.params.id)
   console.log('user.password',user.password)
@@ -73,10 +49,8 @@ router.post('/:id/email', async (req, res, next) => {
 
 router.get('/me', async (req, res, next) => {
   //var meId = req.sessions.meId
-  console.log(req.session.meId)
-  if(req.session.meId) {
-    const meId = req.session.meId
-    const user = await crudController.readById('user', meId)
+  if(req.user.userId) {
+    const user = await crudController.readById('user', req.user.userId)
     api.responseOk(res, user)
   } else {
     api.responseErrorCode(res, 403, 'no auth')
