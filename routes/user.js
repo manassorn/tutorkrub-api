@@ -63,6 +63,9 @@ router.get('/me', async (req, res, next) => {
   //var meId = req.sessions.meId
   if(req.user.userId) {
     const user = await crudController.readById('user', req.user.userId)
+    if(user.availableHours) {
+      user.availableHours = user.availableHours.split(' ').map(d => d.split('').map(h => h == 1))
+    }
     api.responseOk(res, user)
   } else {
     api.responseErrorCode(res, 403, 'no auth')
