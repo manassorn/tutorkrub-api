@@ -50,8 +50,7 @@ router.post('/:id/email', async (req, res, next) => {
 router.post('/:id/availableHours', async (req, res, next) => {
   
   const hours = req.body.availableHours
-  console.log(hours)
-  const encode = hours.map(d => d.map(h => h? 1 :0).join()).join(' ')
+  const encode = hours.map(d => d.map(h => h? 1 :0).join('')).join(' ')
   const payload = {
     availableHours: encode
   }
