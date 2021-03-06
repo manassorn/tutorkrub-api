@@ -47,6 +47,19 @@ router.post('/:id/email', async (req, res, next) => {
   api.responseOk(res)
 });
 
+router.post('/:id/availableHours', async (req, res, next) => {
+  
+  const hours = req.body.availableHours
+  console.log(hours)
+  const encode = hours.map(d => d.map(h => h? 1 :0).join()).join(' ')
+  const payload = {
+    availableHours: encode
+  }
+  await crudController.update('user', req.params.id, payload)
+  api.responseOk(res)
+});
+
+
 router.get('/me', async (req, res, next) => {
   //var meId = req.sessions.meId
   if(req.user.userId) {
