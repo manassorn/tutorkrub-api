@@ -9,7 +9,10 @@ router.get('/test/:amount', async (req,res) => {
     const resp = await payController.testPay(500)
     api.responseOk(res,(resp))
   } catch (e) {
-    console.log(JSON.toString(e))
+    console.log(e)
+    console.log(e.response)
+    console.log(e.response.status)
+    console.log(e.response.body)
     api.responseOk(res, e)
   }
 })
