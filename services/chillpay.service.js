@@ -46,7 +46,7 @@ module.exports.pay = async (customerId, orderNo, amount ,ipAddress = '127.0.0.1'
 }
 
 function md5(data) {
-  crypto.createHash('md5').update(data).digest("hex");
+  return crypto.createHash('md5').update(data).digest("hex");
 }
 
 async function getOrderNo(userId) {
