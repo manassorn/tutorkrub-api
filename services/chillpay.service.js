@@ -3,9 +3,8 @@ const crypto = require('crypto');
 const firestoreService = require('./firestore.service')
 
 
-module.exports.pay = async (customerId, amount ,ipAddress = '127.0.0.1') => {
+module.exports.pay = async (customerId, orderNo, amount ,ipAddress = '127.0.0.1') => {
   const merchantCode = process.env.CHILLPAY_MERCHANT_CODE
-  const orderNo = await getOrderNo(userId)
   const apiKey = process.env.CHILLPAY_API_KEY
   const forChecksum = merchantCode +
   orderNo + customerId + amount + 

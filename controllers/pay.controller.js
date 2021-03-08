@@ -14,6 +14,6 @@ module.exports.pay = async (customerId, amount) => {
 
 module.exports.testPay = async (amount) => {
   
-  const snapshot = await chillpayService.pay('pun', 500)
+  const snapshot = await chillpayService.pay('pun','111', 500)
 
 }
