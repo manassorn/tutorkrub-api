@@ -8,7 +8,7 @@ router.get('/test/:amount', async (req,res) => {
   try {
     const resp = await payController.testPay(500)
     console.log(resp.status)
-    console.log(resp.body)
+    console.log(resp.data)
     api.responseOk(res,(resp))
   } catch (e) {
     console.log(e)
