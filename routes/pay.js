@@ -28,3 +28,5 @@ router.post('/appointment/:id', async (req, res, next) => {
   api.responseOk(res, appointment)
   
 })*/
+
+module.exports = router;
