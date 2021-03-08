@@ -14,6 +14,6 @@ module.exports.pay = async (customerId, amount) => {
 
 module.exports.testPay = async (amount) => {
   
-  return await chillpayService.pay('pun','111', 500)
+  return await chillpayService.pay('pun','111', 5000)
 
 }
