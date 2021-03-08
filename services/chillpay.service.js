@@ -30,7 +30,7 @@ module.exports.pay = async (customerId, orderNo, amount ,ipAddress = '127.0.0.1'
     }
   }
   
-  const resp = await axios.post(process.CHILLPAY_URL, params, config)
+  const resp = await axios.post(process.env.CHILLPAY_URL, params, config)
   return resp;
     
 
