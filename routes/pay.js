@@ -7,6 +7,8 @@ var payController = require('../controllers/pay.controller')
 router.get('/test/:amount', async (req,res) => {
   try {
     const resp = await payController.testPay(500)
+    console.log(resp.status)
+    console.log(resp.body)
     api.responseOk(res,(resp))
   } catch (e) {
     console.log(e)
