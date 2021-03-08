@@ -17,6 +17,7 @@ var usersRouter = require('./routes/user');
 var crudRouter = require('./routes/crud');
 var uploadRouter = require('./routes/upload');
 var verificationRouter = require('./routes/verification');
+var payRouter = require('./routes/pay');
 
 var app = express();
 
@@ -52,6 +53,7 @@ app.use('/api/user', usersRouter);
 app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/verification', verificationRouter);
+app.use('/api/pay', payRouter);
 
 
 module.exports = app;
