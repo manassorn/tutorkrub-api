@@ -10,7 +10,9 @@ module.exports.pay = async (customerId, orderNo, amount ,ipAddress = '127.0.0.1'
   orderNo + customerId + amount + 
   'bank_qrcode764TH1' + ipAddress + 
   apiKey + process.env.CHILLPAY_SECRET_KEY
+  console.log(forChecksum)
   const checkSum = md5(forChecksum)
+  console.log(checkSum);
   const params = new URLSearchParams()
   params.append('MerchantCode', merchantCode)
   params.append('OrderNo', orderNo)
