@@ -7,10 +7,13 @@ var firestoreService = require('../services/firestore.service')
 
 
 router.post('/course/:id', async (req, res, next) => {
+  const studentId = req.user.userId  
   const courseId = req.params.courseId
+  const startTime = req.body.startTime
+  const length = req.body.length
+  
   const course = await crudController.readById(courseId)
   const tutorId = course.tutorId
-  const studentId = req.user.userId
   const payload = {
     courseId, startTime, length, tutorId, studentId, 
     status: 'to_be_paid' //to_be_accepted, to_be_started, complete
