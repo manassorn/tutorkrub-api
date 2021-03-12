@@ -9,12 +9,13 @@ module.exports.list = async () => {
   var tutorIds = courses.map(course => course.tutorId).filter(id => id !== undefined)
   var snapshot = await firestoreService.firestore.collection('user').where(admin.firestore.FieldPath.documentId(), 'in', tutorIds).get()
   var users = firestoreService.toList(snapshot)
-  var userAvatars = {}
+  var usersMap = {}
   users.map(user => {
-    userAvatars[user.id] = user.avatarUrl
+    usersMap[user.id] = user
   })
   courses = courses.map(course => {
-    course.tutorAvatarUrl = userAvatars[course.tutorId]
+    course.tutorAvatarUrl = userAvatars[course.tutorId].avatarUrl
+    course.tutorName = userAvatars[course.tutorId].name
     return course
   })
   return courses
@@ -24,5 +25,6 @@ module.exports.get = async (id) => {
   var course = await crudController.readById('course', id)
   var tutor = await crudController.readById('user', course.tutorId)
   course.tutorAvatarUrl = tutor.avatarUrl
+  course.tutorName = tutor.name
   return course
 }
