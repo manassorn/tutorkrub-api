@@ -45,3 +45,5 @@ router.get('student/status/:status', async (req, res, next) => {
   });
   return appointments;
 })
+
+module.exports = router

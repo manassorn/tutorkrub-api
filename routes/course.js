@@ -25,3 +25,5 @@ router.get('/list', async (req, res, next) => {
   var courses = await courseController.list()
   api.responseOk(res, courses)
 });
+
+module.exports = router
