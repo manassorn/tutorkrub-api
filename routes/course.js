@@ -27,4 +27,10 @@ router.get('/list', async (req, res, next) => {
   api.responseOk(res, courses)
 });
 
+router.get('/:id', async (req, res, next) => {
+  var id = req.params.id
+  var course = await courseController.get(id)
+  api.responseOk(res, course)
+});
+
 module.exports = router
