@@ -3,6 +3,7 @@ var router = express.Router();
 
 var api = require('./api')
 var crudController = require('../controllers/crud.controller')
+var courseController = require('../controllers/.course.controller')
 
 
 router.post('/', async (req, res, next) => {
@@ -18,4 +19,9 @@ router.post('/', async (req, res, next) => {
   
   api.responseOk(res, course)
   
+});
+
+router.get('/list', async (req, res, next) => {
+  var courses = await courseController.list()
+  api.responseOk(res, courses)
 });

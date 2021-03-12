@@ -35,3 +35,11 @@ module.exports.readById = async (collection, id) => {
   const data = doc.data()
   return { id, ...data }
 };
+
+module.exports.toList = (snapshot) => {
+  return snapshot.docs.map(doc => {
+    const id = doc.id
+    const data = doc.data()
+    return { id, ...data }
+  });
+}
