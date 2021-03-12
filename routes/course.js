@@ -3,7 +3,7 @@ var router = express.Router();
 
 var api = require('./api')
 var crudController = require('../controllers/crud.controller')
-var courseController = require('../controllers/.course.controller')
+var courseController = require('../controllers/course.controller')
 
 
 router.post('/', async (req, res, next) => {
