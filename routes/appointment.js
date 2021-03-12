@@ -25,7 +25,6 @@ router.post('/course/:id', async (req, res, next) => {
 });
 
 router.get('tutor/status/:status', (req, res, next) => {
-  const
   const snapshot = await firestore.firestore.collection('appointment').where('tutorId', '==', req.user.userId).where('status', '==', req.params.status).get()
   
   const appointments = snapshot.docs.map(doc => {
