@@ -11,6 +11,8 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
+var jwtMiddleware = require('./middlewares/jwt.middleware')
+
 var indexRouter = require('./routes/index');
 var authenRouter = require('./routes/authen');
 var usersRouter = require('./routes/user');
@@ -48,6 +50,8 @@ app.use(cookieParser());
 // app.use(session(sess))
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(jwtMiddleware.extractUser);
 
 app.use('/', indexRouter);
 app.use('/api/authen', authenRouter);
