@@ -61,6 +61,7 @@ router.post('/:id/availableHours', async (req, res, next) => {
 
 router.get('/me', async (req, res, next) => {
   //var meId = req.sessions.meId
+  console.log(req.user.userId)
   if(req.user.userId) {
     const user = await crudController.readById('user', req.user.userId)
     if(user.availableHours) {
