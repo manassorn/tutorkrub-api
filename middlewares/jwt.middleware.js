@@ -1,3 +1,5 @@
+var jwt = require('jsonwebtoken')
+
 module.exports.extractUser = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (authHeader) {
