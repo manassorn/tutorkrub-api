@@ -30,7 +30,7 @@ router.get('/session', async (req, res, next) => {
 });
 
 router.post('/logout', async (req, res, next) => {
-  req.session.meId = null
+  req.user = null
   api.responseOk(res)
 });
 
