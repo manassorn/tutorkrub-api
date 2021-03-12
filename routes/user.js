@@ -73,4 +73,10 @@ router.get('/me', async (req, res, next) => {
   }
 });
 
+router.get('/:id/availableHours', async (req, res, next) => {
+
+  const user = await crudController.readById('user', req.params.id)
+  api.responseOk(res, user.availableHours)
+});
+
 module.exports = router;
