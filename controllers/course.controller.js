@@ -14,8 +14,8 @@ module.exports.list = async () => {
     usersMap[user.id] = user
   })
   courses = courses.map(course => {
-    course.tutorAvatarUrl = userAvatars[course.tutorId].avatarUrl
-    course.tutorName = userAvatars[course.tutorId].name
+    course.tutorAvatarUrl = usersMap[course.tutorId].avatarUrl
+    course.tutorName = usersMap[course.tutorId].name
     return course
   })
   return courses
