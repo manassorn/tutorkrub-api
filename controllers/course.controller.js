@@ -13,15 +13,11 @@ module.exports.list = async () => {
   users.map(user => {
     usersMap[user.id] = user
   })
-  console.log(usersMap)
   courses = courses.map(course => {
-    console.log(course.tutorId)
-    console.log(usersMap[course.tutorId])
     course.tutorAvatarUrl = usersMap[course.tutorId]||{}.avatarUrl
     course.tutorName = usersMap[course.tutorId]||{}.name
     return course
   })
-  console.log(courses)
   return courses
 }
 
