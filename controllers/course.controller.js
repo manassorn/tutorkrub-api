@@ -13,6 +13,8 @@ module.exports.list = async () => {
   users.map(user => {
     usersMap[user.id] = user
   })
+  console.log(users)
+  console.log(usersMap)
   courses = courses.map(course => {
     course.tutorAvatarUrl = usersMap[course.tutorId]||{}.avatarUrl
     course.tutorName = usersMap[course.tutorId]||{}.name
