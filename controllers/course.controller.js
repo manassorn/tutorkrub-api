@@ -21,6 +21,7 @@ module.exports.list = async () => {
     course.tutorName = usersMap[course.tutorId]||{}.name
     return course
   })
+  console.log(courses)
   return courses
 }
 
