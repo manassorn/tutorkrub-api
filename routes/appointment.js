@@ -6,7 +6,7 @@ var crudController = require('../controllers/crud.controller')
 var firestoreService = require('../services/firestore.service')
 
 
-router.post('/course/:id', async (req, res, next) => {
+router.post('/course/:courseId', async (req, res, next) => {
   const studentId = req.user.userId  
   const courseId = req.params.courseId
   const startTime = req.body.startTime
