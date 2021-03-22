@@ -12,7 +12,7 @@ router.post('/course/:id', async (req, res, next) => {
   const startTime = req.body.startTime
   const length = req.body.length
   
-  const course = await crudController.readById(courseId)
+  const course = await crudController.readById('course', courseId)
   const tutorId = course.tutorId
   const payload = {
     courseId, startTime, length, tutorId, studentId, 
