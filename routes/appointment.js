@@ -4,6 +4,7 @@ var router = express.Router();
 var api = require('./api')
 var crudController = require('../controllers/crud.controller')
 var firestoreService = require('../services/firestore.service')
+var admin = require('firebase-admin')
 
 
 router.post('/course/:courseId', async (req, res, next) => {
