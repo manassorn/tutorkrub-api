@@ -50,9 +50,11 @@ router.get('/student/status/:status', async (req, res, next) => {
     courseMap[c.id] = c.name
   })
   
-  return appointments.map(a => {
+  appointments = appointments.map(a => {
     a.courseName = courseMap[a.courseId]
   })
+  
+  api.responseOk(res, appointments)
   
 })
 
