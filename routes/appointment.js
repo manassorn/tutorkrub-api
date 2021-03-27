@@ -39,13 +39,12 @@ router.get('/tutor/status/:status', async (req, res, next) => {
 router.get('/student/status/:status', async (req, res, next) => {
   let snapshot = await firestoreService.firestore.collection('appointment').where('studentId', '==', req.user.userId).where('status', '==', req.params.status).get()
   let appointments = firestoreService.toList(snapshot)
-  console.log(appointments.length)
 
   const courseIdList = appointments.map(a => a.courseId)
   
   snapshot = await firestoreService.firestore.collection('course').where(admin.firestore.FieldPath.documentId(), 'in', courseIdList).get()
   var courses = firestoreService.toList(snapshot)
-  const courseMap = []
+  const courseMap = {}
   courses.map(c => {
     courseMap[c.id] = c.name
   })
