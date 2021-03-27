@@ -25,7 +25,7 @@ router.post('/course/:courseId', async (req, res, next) => {
 });
 
 router.get('/tutor/status/:status', async (req, res, next) => {
-  const snapshot = await firestore.firestore.collection('appointment').where('tutorId', '==', req.user.userId).where('status', '==', req.params.status).get()
+  const snapshot = await firestoreService.firestore.collection('appointment').where('tutorId', '==', req.user.userId).where('status', '==', req.params.status).get()
   
   const appointments = snapshot.docs.map(doc => {
     const id = doc.id
@@ -36,7 +36,7 @@ router.get('/tutor/status/:status', async (req, res, next) => {
 })
 
 router.get('/student/status/:status', async (req, res, next) => {
-  const snapshot = await firestore.firestore.collection('appointment').where('studentId', '==', req.user.userId).where('status', '==', req.params.status).get()
+  const snapshot = await firestoreService.firestore.collection('appointment').where('studentId', '==', req.user.userId).where('status', '==', req.params.status).get()
 
   const appointments = snapshot.docs.map(doc => {
     const id = doc.id
