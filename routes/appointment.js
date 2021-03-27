@@ -46,7 +46,7 @@ router.get('/student/status/:status', async (req, res, next) => {
   var courses = firestoreService.toList(snapshot)
   const courseMap = {}
   courses.map(c => {
-    courseMap[c.id] = c.name
+    courseMap[c.id] = c.title
   })
   
   appointments = appointments.map(a => {
