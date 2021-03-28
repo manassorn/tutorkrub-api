@@ -54,6 +54,7 @@ router.get('/student/status/:status', async (req, res, next) => {
   
   const tutors = userController.getByIdList(tutorIdList)
   const tutorMap = {}
+  console.log(tutors)
   tutors.map(t => {
     tutorMap[t.id] = {name: t.name, avatarUrl: t.avatarUrl}
   })
