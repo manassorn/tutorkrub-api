@@ -1,4 +1,5 @@
 var firestoreService = require('../services/firestore.service')
+var admin = require('firebase-admin')
 
 module.exports.getUserByEmailPassword = async (email, password) => {
   const snapshot = await firestoreService.firestore.collection('user').where('email', '==', email).where('password', '==', password).get()
