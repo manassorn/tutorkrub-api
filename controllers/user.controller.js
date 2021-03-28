@@ -1,7 +1,7 @@
-var firestore = require('../services/firestore.service')
+var firestoreService = require('../services/firestore.service')
 
 module.exports.getUserByEmailPassword = async (email, password) => {
-  const snapshot = await firestore.firestore.collection('user').where('email', '==', email).where('password', '==', password).get()
+  const snapshot = await firestoreService.firestore.collection('user').where('email', '==', email).where('password', '==', password).get()
 
   const users = snapshot.docs.map(doc => {
     const id = doc.id
@@ -11,3 +11,8 @@ module.exports.getUserByEmailPassword = async (email, password) => {
   return users[0];
 }
 
+module.exports.getByIdList = (idList) => {
+  const snapshot = await firestoreService.firestore.collection('user').where(admin.firestore.FieldPath.documentId(), 'in', idList).get()
+  const users = firestoreService.toList(snapshot)
+  return users
+}

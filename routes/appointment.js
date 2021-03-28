@@ -3,6 +3,7 @@ var router = express.Router();
 
 var api = require('./api')
 var crudController = require('../controllers/crud.controller')
+var userController = require('../controllers/user.controller')
 var firestoreService = require('../services/firestore.service')
 var admin = require('firebase-admin')
 
@@ -49,8 +50,19 @@ router.get('/student/status/:status', async (req, res, next) => {
     courseMap[c.id] = c.title
   })
   
+  const tutorIdList = appointments.map(a => a.tutorId)
+  
+  const tutors = userController.getByIdList(tutorIdList)
+  const tutorMap = {}
+  tutors.map(t => {
+    tutorMap[t.id] = {name: t.name, avatarUrl: t.avatarUrl}
+  })
+  
+  
   appointments = appointments.map(a => {
     a.courseName = courseMap[a.courseId]
+    a.tutorName = tutorMap[a.tutor].name
+    a.tutorAvatarUrl = tutorMap[a.tutor].avatarUrl
     return a
   })
   
