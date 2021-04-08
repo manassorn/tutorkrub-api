@@ -1,4 +1,4 @@
-var firestoreService = require('../services/firestoreService.service')
+var firestoreService = require('../services/firestore.service')
 var sendgrid = require('../services/sendgrid.service')
 
 
