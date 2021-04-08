@@ -7,6 +7,33 @@ var userController = require('../controllers/user.controller')
 var firestoreService = require('../services/firestore.service')
 var admin = require('firebase-admin')
 
+router.get('/:appointmentId/message', async (req, res, next) => {
+  // todo - check weather user is tutor or student
+  let messages = await crudController.readSub('appointment', appointmentId, 'message')
+  const userIds = messages.map(m => m.from)
+  const users = await crudController.whereIdIn('user', userIds)
+  const userMap = crudController.listToMap(users, 'id')
+  messages = messages.map(m => {
+    m.fromAvatarUrl = userMap[m.from].avatarUrl
+    m.fromName = userMap[m.from].name
+    return m
+  })
+  
+  api.responseOk(res, messages)
+})
+
+router.post('/:appointmentId/message', async (req, res, next) => {
+  // todo - check weather user is tutor or student
+  const userId = req.user.userId  
+  const appointmentId = req.params.appointmentId
+  const payload = {
+    timestamp: new Date(),
+    message: req.body.message,
+    from: userId
+  }
+  const appointment = await crudController.createSub('appointment', appointmentId, 'message', payload)
+  api.responseOk(res, appointment)
+})
 
 router.post('/course/:courseId', async (req, res, next) => {
   const studentId = req.user.userId  

@@ -17,6 +17,10 @@ module.exports.create = (collection, payload) => {
     return firestore.collection(collection).add(payload)
 }
 
+module.exports.createSub = (collection, id,  subCollection, payload) => {
+  return firestore.collection(collection).doc(id).collection(subCollection).add(payload)
+}
+
 module.exports.update = (collection, id, payload) => {
     return firestore.collection(collection).doc(id).update(payload)
 }
