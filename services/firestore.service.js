@@ -34,6 +34,16 @@ module.exports.read = async (collection) => {
   });
 };
 
+module.exports.readSub = async (collection, id, subCollection) => {
+  const snapshot = await firestore.collection(collection).doc(id).collection(subCollection).get()
+  return snapshot.docs.map(doc => {
+    const id = doc.id
+    const data = doc.data()
+    return {id, ...data}
+  });
+};
+
+
 module.exports.readById = async (collection, id) => {
   const doc = await firestore.collection(collection).doc(id).get()
   const data = doc.data()
