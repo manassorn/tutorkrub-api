@@ -9,6 +9,7 @@ var admin = require('firebase-admin')
 
 router.get('/:appointmentId/message', async (req, res, next) => {
   // todo - check weather user is tutor or student
+  const appointmentId = req.params.appointmentId
   let messages = await crudController.readSub('appointment', appointmentId, 'message')
   const userIds = messages.map(m => m.from)
   const users = await crudController.whereIdIn('user', userIds)
