@@ -31,7 +31,7 @@ router.post('/:appointmentId/message', async (req, res, next) => {
   const appointmentId = req.params.appointmentId
   const payload = {
     timestamp: new Date(),
-    message: req.body.message,
+    text: req.body.text,
     from: userId
   }
   const appointment = await crudController.createSub('appointment', appointmentId, 'message', payload)
