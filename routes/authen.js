@@ -19,8 +19,9 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-router.get('/1clicklogin', async (req, res, next) => {
-  const accessToken = jwt.sign({ userId: 'hNqOKzYwhJjZTIDLUkf5' }, process.env.TOKEN_SECRET, {expiresIn: 60});
+router.get('/devlogin/:userId', async (req, res, next) => {
+  //hNqOKzYwhJjZTIDLUkf5
+  const accessToken = jwt.sign({ userId }, process.env.TOKEN_SECRET, {expiresIn: 60});
   res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + 900000), httpOnly: true, secure: true })
   api.responseOk(res, {accessToken})
 });
