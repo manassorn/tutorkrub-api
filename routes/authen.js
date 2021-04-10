@@ -21,6 +21,7 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/devlogin/:userId', async (req, res, next) => {
   //hNqOKzYwhJjZTIDLUkf5
+  const userId = req.params.userId
   const accessToken = jwt.sign({ userId }, process.env.TOKEN_SECRET, {expiresIn: 60});
   res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + 900000), httpOnly: true, secure: true })
   api.responseOk(res, {accessToken})
