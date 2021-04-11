@@ -11,7 +11,7 @@ var format = require('date-fns-tz')
 router.get('/:appointmentId/message', async (req, res, next) => {
   // todo - check weather user is tutor or student
   const appointmentId = req.params.appointmentId
-  let messages = await crudController.readSub('appointment', appointmentId, 'message').orderBy('timestamp', 'desc')
+  let messages = await crudController.readSub('appointment', appointmentId, 'message')
   if(messages.length > 0) {
   const userIds = messages.map(m => m.from)
   const users = await crudController.whereIdIn('user', userIds)
