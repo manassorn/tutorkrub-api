@@ -6,6 +6,7 @@ var crudController = require('../controllers/crud.controller')
 var userController = require('../controllers/user.controller')
 var firestoreService = require('../services/firestore.service')
 var admin = require('firebase-admin')
+var format = require('date-fns-tz')
 
 router.get('/:appointmentId/message', async (req, res, next) => {
   // todo - check weather user is tutor or student
@@ -16,6 +17,7 @@ router.get('/:appointmentId/message', async (req, res, next) => {
   const users = await crudController.whereIdIn('user', userIds)
   const userMap = crudController.listToMap(users, 'id')
   messages = messages.map(m => {
+    m.timestamp = m.timestamp.toDate()
     m.fromAvatarUrl = userMap[m.from].avatarUrl
     m.fromName = userMap[m.from].name
     return m
