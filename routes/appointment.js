@@ -17,7 +17,7 @@ router.get('/:appointmentId/message', async (req, res, next) => {
   const users = await crudController.whereIdIn('user', userIds)
   const userMap = crudController.listToMap(users, 'id')
   messages = messages.map(m => {
-    m.timestamp = m.timestamp.toDate()
+    //m.timestamp = m.timestamp.toDate()
     m.fromAvatarUrl = userMap[m.from].avatarUrl
     m.fromName = userMap[m.from].name
     return m
