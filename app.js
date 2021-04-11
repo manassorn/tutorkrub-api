@@ -69,7 +69,7 @@ app.set('json replacer', function(key, value) {
   if (this[key]._seconds) {
     // Your own custom date serialization
     value = new Date(this[key]._seconds*1000)
-    value = format(value, "yyyy-MM-dd'T'HH:mm:ssXXX", {timeZone:'Bangkok'})
+    value = format(value, "yyyy-MM-dd'T'HH:mm:ssXXX", {timeZone:'Asia/Bangkok'})
   }
 
   return value;
