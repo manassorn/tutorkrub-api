@@ -64,5 +64,16 @@ app.use('/api/pay', payRouter);
 app.use('/api/course', courseRouter);
 app.use('/api/appointment', appointmentRouter);
 
+app.set('json replacer', function(key, value) {
+  const format = require('date-fns-tz/format')
+  if (this[key]._seconds) {
+    // Your own custom date serialization
+    value = new Date(this[key]._seconds)
+    value = format(value, "yyyy-MM-dd'T'HH:mm:ssXXX")
+  }
+
+  return value;
+});
+
 
 module.exports = app;
