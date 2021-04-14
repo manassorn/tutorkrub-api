@@ -64,6 +64,9 @@ app.use('/api/pay', payRouter);
 app.use('/api/course', courseRouter);
 app.use('/api/appointment', appointmentRouter);
 
+app.get('*', express.static(path.join(__dirname, 'public', 'index.html')));
+
+
 app.set('json replacer', function(key, value) {
   const format = require('date-fns-tz/format')
   if (this[key] && this[key]._seconds) {
@@ -75,7 +78,6 @@ app.set('json replacer', function(key, value) {
   return value;
 });
 
-app.get('/', express.static(path.join(__dirname, 'public')));
 
 
 
