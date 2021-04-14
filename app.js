@@ -7,7 +7,7 @@ dotenv.config({ path: path.resolve(process.cwd(), 'conf/.env') });
 var express = require('express');
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
+// var session = require('express-session');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
@@ -64,7 +64,10 @@ app.use('/api/pay', payRouter);
 app.use('/api/course', courseRouter);
 app.use('/api/appointment', appointmentRouter);
 
-app.get('*', express.static(path.join(__dirname, 'public', 'index.html')));
+app.get('*', function(req,res) {
+  res.sendFile(path.resolve(path.join(__dirname, 'public', 'index.html')))
+});
+// app.get('/user', express.static(path.join(__dirname, 'public') + '/index.html'));
 
 
 app.set('json replacer', function(key, value) {
