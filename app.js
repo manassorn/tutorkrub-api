@@ -75,5 +75,8 @@ app.set('json replacer', function(key, value) {
   return value;
 });
 
+app.get('/', express.static(path.join(__dirname, 'public')));
+
+
 
 module.exports = app;
