@@ -22,6 +22,22 @@ router.post('/', async (req, res, next) => {
   
 });
 
+router.post('/:id', async (req, res, next) => {
+  const courseId = req.params.id
+  const title = req.body.title
+  const description = req.body.description
+  const price = req.body.price
+  const category = req.body.category
+  const tutorId = req.user.userId
+
+  const payload = {title, description, price, category, tutorId}
+
+  const course = await crudController.update('course', courseId, payload)
+
+  api.responseOk(res, course)
+
+});
+
 router.get('/list', async (req, res, next) => {
   var courses = await courseController.list()
   api.responseOk(res, courses)
