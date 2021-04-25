@@ -32,6 +32,8 @@ router.post('/:id', async (req, res, next) => {
   const price = req.body.price
   const tutorId = req.user.userId
 
+  const payload = {title, description, schoolLevel, subject, price, tutorId}
+
   const course = await crudController.update('course', courseId, payload)
 
   api.responseOk(res, course)
