@@ -10,11 +10,12 @@ var courseController = require('../controllers/course.controller')
 router.post('/', async (req, res, next) => {
   const title = req.body.title
   const description = req.body.description
+  const schoolLevel = req.body.schoolLevel
+  const subject = req.body.subject
   const price = req.body.price
-  const category = req.body.category
   const tutorId = req.user.userId
   
-  const payload = {title, description, price, category, tutorId}
+  const payload = {title, description, schoolLevel, subject, price, tutorId}
   
   const course = await crudController.create('course', payload)
   
@@ -26,11 +27,10 @@ router.post('/:id', async (req, res, next) => {
   const courseId = req.params.id
   const title = req.body.title
   const description = req.body.description
+  const schoolLevel = req.body.schoolLevel
+  const subject = req.body.subject
   const price = req.body.price
-  const category = req.body.category
   const tutorId = req.user.userId
-
-  const payload = {title, description, price, category, tutorId}
 
   const course = await crudController.update('course', courseId, payload)
 
