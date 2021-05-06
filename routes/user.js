@@ -7,11 +7,11 @@ var crudController = require('../controllers/crud.controller')
 var userController = require('../controllers/user.controller')
 
 router.post('/', async(req, res, next) => {
-  var passed = await verificationController.verifyForEmail(req.body.email, req.body.code)
+  /*var passed = await verificationController.verifyForEmail(req.body.email, req.body.code)
   if(passed === false) {
     api.responseError('code is incorrect')
     return false
-  }
+  }*/
   const payload = {
     email: req.body.email,
     name: req.body.name,
