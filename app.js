@@ -55,7 +55,7 @@ app.use(jwtMiddleware.extractUser);
 
 app.use('/', indexRouter);
 app.use('/api/authen', authenRouter);
-app.use('/api/user', authenRouter.authenticateJWT);
+//app.use('/api/user', authenRouter.authenticateJWT);
 app.use('/api/user', usersRouter);
 app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
