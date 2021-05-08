@@ -9,7 +9,7 @@ var userController = require('../controllers/user.controller')
 
 router.post('/fb', async (req, res, next) => {
   axios.get(`https://graph.facebook.com/me?access_token=${accessToken}`)
-    .then(response => {
+    .then(async (response) => {
       const { data } = response;
       if (data.error) return api.responseUnauthorized(res, data.error.message);
       
