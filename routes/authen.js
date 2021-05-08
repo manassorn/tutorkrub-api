@@ -14,29 +14,27 @@ router.post('/fb', async (req, res, next) => {
       if (data.error) return api.responseUnauthorized(res, data.error.message);
       
       let account = crudController.readByUniqueField('loginAccounts', 'fbId', data.id)
+      let user = undefined
       if(!account) {
-        const user = {
+        user = {
           name: data.name
         }
         const userRef = await crudController.create('users', user)
+        user.id = userRef.id
         account = {
           fbId: data.id,
           userId: userRef.id
         }
         crudController.create('loginAccounts', account)
-        return api.responseOk(res, user)
 
       } else {
-        const user = await crudController.readById('users', account.userId)
-        return api.responseOk(res, user)
+        user = await crudController.readById('users', account.userId)
       }
       
+      generateJwtToken(res, user.id)
+      return api.responseOk(res, user)
+
   
-  
-      /*return ok({
-        ...account,
-        token: generateJwtToken(account)
-      });*/
     });
 })
 
@@ -73,12 +71,12 @@ router.post('/logout', async (req, res, next) => {
   api.responseOk(res)
 });
 
-function generateJwtToken(userId) {
+function generateJwtToken(res, userId) {
   const accessToken = jwt.sign({ userId }, process.env.TOKEN_SECRET, { expiresIn: '7d' });
-  return accessToken;
   
-  res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + 900000), httpOnly: true, secure: true })
-  api.responseOk(res, { accessToken })
+  const d7 = 7 * 24 * 60 * 60 * 1000
+  //res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + d7), httpOnly: true, secure: true })
+  res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + d7), httpOnly: true })
 }
 
 
