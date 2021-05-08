@@ -50,6 +50,16 @@ module.exports.readById = async (collection, id) => {
   return { id, ...data }
 };
 
+module.exports.readByUniqueField = async (collection, fieldName, fieldValue) => {
+  const snapshot = await firestore.collection(collection).where(fieldName, '==', fieldValue).get()
+  const a = snapshot.docs.map(doc => {
+    const id = doc.id
+    const data = doc.data()
+    return { id, ...data }
+  });
+  return a[0]
+};
+
 module.exports.toList = (snapshot) => {
   return snapshot.docs.map(doc => {
     const id = doc.id

@@ -31,6 +31,11 @@ module.exports.readById = async (collection, id) => {
   return data;
 }
 
+module.exports.readByUniqueField = async (collection, fieldName, fieldValue) => {
+  const data = await firestoreService.readByUniqueField(collection, fieldName, fieldValue)
+  return data;
+}
+
 const whereIdIn = async (collection, ids) => {
   const snapshot = await firestoreService.firestore.collection(collection).where(admin.firestore.FieldPath.documentId(), 'in', ids).get()
   const list = firestoreService.toList(snapshot)
