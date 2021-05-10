@@ -54,6 +54,14 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+router.get('/devlogin2/:userId', async (req, res, next) => {
+  //hNqOKzYwhJjZTIDLUkf5
+  const userId = req.params.userId
+  generateJwtToken(res, userId)
+  const user = crudController.readById('user', userId)
+  api.responseOk(res, user)
+});
+
 router.get('/devlogin/:userId', async (req, res, next) => {
   //hNqOKzYwhJjZTIDLUkf5
   const userId = req.params.userId
