@@ -57,10 +57,9 @@ router.post('/login', async (req, res, next) => {
 router.get('/devlogin2/:userId', async (req, res, next) => {
   //hNqOKzYwhJjZTIDLUkf5
   const userId = req.params.userId
-  console.log('qqqq')
-  generateJwtToken(res, userId)
+  const token = generateJwtToken(res, userId)
+  res.set('accessTokenDev', token)
   const user = crudController.readById('user', userId)
-  console.log('agags')
   api.responseOk(res, user)
 });
 
@@ -87,6 +86,7 @@ function generateJwtToken(res, userId) {
   const d7 = 7 * 24 * 60 * 60 * 1000
   //res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + d7), httpOnly: true, secure: true })
   res.cookie('accessToken', accessToken, { expires: new Date(Date.now() + d7), httpOnly: true })
+  return accessToken
 }
 
 

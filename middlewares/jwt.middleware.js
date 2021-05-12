@@ -12,9 +12,9 @@ module.exports.extractUser = (req, res, next) => {
             }
         });
     }
-    const accessToken = req.cookies['accessToken']
-    if(accessToken) {
-      jwt.verify(accessToken, process.env.TOKEN_SECRET, (err, user) => {
+    const accessTokenDev = req.cookies['accessTokenDev']
+    if(accessTokenDev) {
+      jwt.verify(accessTokenDev, process.env.TOKEN_SECRET, (err, user) => {
         if (!err) {
           req.user = user;
         }
