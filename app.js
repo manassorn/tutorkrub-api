@@ -26,8 +26,8 @@ var appointmentRouter = require('./routes/appointment');
 
 var app = express();
 
-app.use(cors({origin: '*',credentials:true}))
-app.options('*', cors({origin: '*',credentials:true}))
+app.use(cors({exposedHeaders:'accessTokenDev'}))
+app.options('*', cors({exposedHeaders:'accessTokenDev'}))
 
 app.use(logger('dev'));
 // app.use(express.json());
