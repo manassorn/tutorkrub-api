@@ -56,6 +56,7 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/devlogin2/:userId', async (req, res, next) => {
   //hNqOKzYwhJjZTIDLUkf5
+  console.log('asaaaaa')
   const userId = req.params.userId
   const token = generateJwtToken(res, userId)
   res.set('accessTokenDev', token)
