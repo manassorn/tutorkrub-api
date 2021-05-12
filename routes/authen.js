@@ -59,6 +59,7 @@ router.get('/devlogin2/:userId', async (req, res, next) => {
   const userId = req.params.userId
   const token = generateJwtToken(res, userId)
   res.set('accessTokenDev', token)
+  console.log('setaccesstokendev', token)
   const user = crudController.readById('user', userId)
   api.responseOk(res, user)
 });
