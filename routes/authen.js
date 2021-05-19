@@ -87,7 +87,7 @@ function generateJwtToken(res, userId) {
   
   const d7 = 7 * 24 * 60 * 60 * 1000
   //res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + d7), httpOnly: true, secure: true })
-  res.cookie('accessToken', accessToken, { expires: new Date(Date.now() + d7), httpOnly: true })
+  res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + d7), httpOnly: true })
   return accessToken
 }
 
