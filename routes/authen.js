@@ -43,14 +43,13 @@ router.post('/email', async () => {
 })
 
 router.post('/login', async (req, res, next) => {
-  const user = await userController.getUserByEmailPassword(req.body.email, req.body.password)
+  const user = await authenController.login(req.body.email, req.body.password)
+  
   if (user) {
-    // Generate an access token
-    const accessToken = jwt.sign({ userId: user.id }, process.env.TOKEN_SECRET, {expiresIn: 60});
-    res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + 900000), httpOnly: true, secure: true })
-    api.responseOk(res, {accessToken})
+    generateJwtToken(res, user.id)
+    api.responseOk(res, user)
   } else {
-    api.responseError(res, 'login not success')
+    api.responseUnauthorized(res)
   }
 });
 
@@ -60,17 +59,8 @@ router.get('/devlogin2/:userId', async (req, res, next) => {
   const userId = req.params.userId
   const token = generateJwtToken(res, userId)
   res.set('accessTokenDev', token)
-  console.log('setaccesstokendev', token)
   const user = crudController.readById('user', userId)
   api.responseOk(res, user)
-});
-
-router.get('/devlogin/:userId', async (req, res, next) => {
-  //hNqOKzYwhJjZTIDLUkf5
-  const userId = req.params.userId
-  const accessToken = jwt.sign({ userId }, process.env.TOKEN_SECRET, {expiresIn: 60});
-  res.cookie('accesstoken', accessToken, { expires: new Date(Date.now() + 900000), httpOnly: true, secure: true })
-  api.responseOk(res, {accessToken})
 });
 
 router.get('/session', async (req, res, next) => {
