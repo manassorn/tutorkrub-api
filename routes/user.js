@@ -63,7 +63,7 @@ router.get('/me', async (req, res, next) => {
   //var meId = req.sessions.meId
   console.log(req.user.userId)
   if(req.user.userId) {
-    const user = await crudController.readById('user', req.user.userId)
+    const user = await crudController.readById('Users', req.user.userId)
     if(user.availableHours) {
       user.availableHours = user.availableHours.split(' ').map(d => d.split('').map(h => h == 1))
     }
