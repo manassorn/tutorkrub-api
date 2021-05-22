@@ -25,7 +25,7 @@ module.exports.extractUser = (req, res, next) => {
 
 module.exports.checkLogin = (req, res, next) => {
   if(!req.user) {
-    api.responseUnauthorized()
+    api.responseUnauthorized(res)
   } else {
     next()
   }
