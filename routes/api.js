@@ -27,7 +27,7 @@ module.exports.responseError400 = (res, message) => {
         }
     })
 }
-module.exports.responseUnauthorizes = (res, message) => {
+module.exports.responseUnauthorized = (res, message) => {
   res.status(401).json({
     error: {
       message: 'Unauthorized'

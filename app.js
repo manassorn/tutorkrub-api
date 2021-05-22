@@ -62,7 +62,7 @@ app.use('/api/upload', uploadRouter);
 app.use('/api/verification', verificationRouter);
 app.use('/api/pay', payRouter);
 app.use('/api/course', courseRouter);
-app.use('/api/appointment', appointmentRouter);
+app.use('/api/appointment', jwtMiddleware.checkLogin, appointmentRouter);
 
 app.get('*', function(req,res) {
   res.sendFile(path.resolve(path.join(__dirname, 'public', 'index.html')))

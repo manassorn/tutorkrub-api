@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken')
-
+var api = require('../routes/api')
 module.exports.extractUser = (req, res, next) => {
   
   
@@ -22,3 +22,11 @@ module.exports.extractUser = (req, res, next) => {
     }
     next()
 };
+
+module.exports.checkLogin = (req, res, next) => {
+  if(!req.user) {
+    api.responseUnauthorized()
+  } else {
+    next()
+  }
+}
