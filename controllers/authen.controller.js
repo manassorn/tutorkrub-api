@@ -10,6 +10,6 @@ module.exports.login = async (email, pwd) => {
   var accounts = firestoreService.toList(snapshot)
   if (accounts.length == 0) return undefined
   var userId = accounts[0].userId
-  var user = await crudController.readById(userId)
+  var user = await crudController.readById('Users', userId)
   return user
 }
