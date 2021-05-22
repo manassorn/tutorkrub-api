@@ -78,7 +78,7 @@ router.get('/session', async (req, res, next) => {
 });
 
 router.post('/logout', async (req, res, next) => {
-  req.user = null
+  res.clearCookie('accesstoken',{httpOnly:true})
   api.responseOk(res)
 });
 
