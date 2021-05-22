@@ -6,6 +6,8 @@ var router = express.Router();
 var api = require('./api')
 var crudController = require('../controllers/crud.controller')
 var userController = require('../controllers/user.controller')
+var authenController = require('../controllers/authen.controller')
+
 
 router.post('/fb', async (req, res, next) => {
   axios.get(`https://graph.facebook.com/me?access_token=${accessToken}`)
