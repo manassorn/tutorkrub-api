@@ -8,12 +8,14 @@ module.exports.listByOwner = async (userId) => {
   var courses = await crudController.readBy('Courses', 'tutorId', userId)
   var tutorIds = courses.map(course => course.tutorId).filter(id => id !== undefined)
   
-  var users = await crudController.whereIdIn('Users', tutorIds)
-  
   var usersMap = {}
-  users.map(user => {
-    usersMap[user.id] = user
-  })
+  if (tutorIds.length > 0) {
+    var users = await crudController.whereIdIn('Users', tutorIds)
+    users.map(user => {
+      usersMap[user.id] = user
+    })
+  }
+
   courses = courses.map(course => {
     course.tutorAvatarUrl = (usersMap[course.tutorId]||{}).avatarUrl
     course.tutorName = (usersMap[course.tutorId]||{}).name
