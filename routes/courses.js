@@ -48,7 +48,7 @@ router.get('/mine', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   var id = req.params.id
-  var course = await courseController.get(id)
+  var course = await coursesController.get(id)
   api.responseOk(res, course)
 });
 
