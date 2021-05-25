@@ -26,6 +26,11 @@ module.exports.readSub = async (collection, id, subCollection) => {
   return data;
 }
 
+module.exports.readBy = async (collection, field, value) => {
+  const data = await firestoreService.readBy(collection, id)
+  return data;
+}
+
 module.exports.readById = async (collection, id) => {
   const data = await firestoreService.readById(collection, id)
   return data;

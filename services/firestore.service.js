@@ -13,6 +13,15 @@ const firestore = admin.firestore();
 
 module.exports.firestore =  firestore;
 
+const toList = (snapshot) => {
+  return snapshot.docs.map(doc => {
+    const id = doc.id
+    const data = doc.data()
+    return { id, ...data }
+  });
+}
+module.exports.toList = toList
+
 module.exports.create = (collection, payload) => {
     return firestore.collection(collection).add(payload)
 }
@@ -43,6 +52,11 @@ module.exports.readSub = async (collection, id, subCollection) => {
   });
 };
 
+module.exports.readBy = async (collection, fieldName, fieldValue) => {
+  const snapshot = await firestore.collection(collection).where(fieldName, '==', fieldValue).get()
+  return toList(snapshot)
+};
+
 
 module.exports.readById = async (collection, id) => {
   const doc = await firestore.collection(collection).doc(id).get()
@@ -60,10 +74,3 @@ module.exports.readByUniqueField = async (collection, fieldName, fieldValue) => 
   return a[0]
 };
 
-module.exports.toList = (snapshot) => {
-  return snapshot.docs.map(doc => {
-    const id = doc.id
-    const data = doc.data()
-    return { id, ...data }
-  });
-}

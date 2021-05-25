@@ -17,6 +17,7 @@ module.exports.extractUser = (req, res, next) => {
       jwt.verify(accessTokenDev, process.env.TOKEN_SECRET, (err, user) => {
         if (!err) {
           req.user = user;
+          req.user.id = user.userId
         }
       });
     }
