@@ -21,6 +21,7 @@ module.exports.listByOwner = async (userId) => {
     course.tutorName = (usersMap[course.tutorId]||{}).name
     return course
   })
+  console.log(courses)
   return courses
 }
 
