@@ -85,7 +85,7 @@ module.exports.join = join
 
 module.exports.joinById = async (col1, colName2, id1, id2, mapping) => {
   const ids = col1.map(a => a[id1])
-  var col2 = await crudController.whereIdIn(colName2, ids)
+  var col2 = await whereIdIn(colName2, ids)
 
   return join(col1, col2, id1, id2, mapping)
 }
