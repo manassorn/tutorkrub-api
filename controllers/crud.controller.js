@@ -54,11 +54,6 @@ const whereIdIn = async (collection, ids) => {
 }
 module.exports.whereIdIn = whereIdIn
 
-module.exports.join = async (leftList, collection, fieldA, fieldB, fieldNeeded) => {
-  const a = leftList.map(item => item[fieldA])
-  const b = whereIdIn(collection, a)
-}
-
 module.exports.listToMap = (list, key = 'id') => {
   const m = {}
   list.map(item => {
@@ -67,7 +62,7 @@ module.exports.listToMap = (list, key = 'id') => {
   return m
 }
 
-module.exports.join = (col1, col2, id1, id2, mapping) => {
+const join = (col1, col2, id1, id2, mapping) => {
   
   const col2Map = {}
   col2.map(item => {
@@ -84,4 +79,13 @@ module.exports.join = (col1, col2, id1, id2, mapping) => {
   })
   
   return newCol
+}
+
+module.exports.join = join
+
+module.exports.joinById = async (col1, colName2, id1, id2, mapping) => {
+  const ids = col1.map(a => a[id1])
+  var col2 = await crudController.whereIdIn(colName2, ids)
+
+  return join(col1, col2, id1, id2, mapping)
 }

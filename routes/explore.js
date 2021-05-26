@@ -6,6 +6,7 @@ var crudController = require('../controllers/crud.controller')
 
 router.get('/', async (req, res) => {
   var courses = await crudController.read('Courses')
+  courses = await crudController.joinById(courses,'Users','tutorId','id',{'tutorAvatarUrl':'avatarUrl'})
   api.ok(res, courses)
 })
 
