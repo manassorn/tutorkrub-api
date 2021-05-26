@@ -13,6 +13,7 @@ module.exports.getUserByEmailPassword = async (email, password) => {
 }
 
 module.exports.getByIdList = async(idList) => {
+  if(idList.length == 0) return []
   const snapshot = await firestoreService.firestore.collection('user').where(admin.firestore.FieldPath.documentId(), 'in', idList).get()
   const users = firestoreService.toList(snapshot)
   return users
