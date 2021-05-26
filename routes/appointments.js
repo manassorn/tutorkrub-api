@@ -73,12 +73,7 @@ router.get('/study', async (req, res, next) => {
   var appointments = await crudController.readBy2('Appointments','studentId',userId,'status',status)
 
   const courseIdList = appointments.map(a => a.courseId)
-  var courses = crudController.whereIdIn(courseIdList)
-  
-  const courseMap = {}
-  courses.map(c => {
-    courseMap[c.id] = c.title
-  })
+  var courses = await crudController.whereIdIn(courseIdList)
   
   const tutorIdList = appointments.map(a => a.tutorId)
   const tutors = await userController.getByIdList(tutorIdList)
