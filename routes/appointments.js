@@ -93,8 +93,8 @@ router.get('/student/status/:status', async (req, res, next) => {
   
   appointments = appointments.map(a => {
     a.courseName = courseMap[a.courseId]
-    a.tutorName = tutorMap[a.tutorId]?.name
-    a.tutorAvatarUrl = tutorMap[a.tutorId]?.avatarUrl
+    a.tutorName = (tutorMap[a.tutorId]||{}).name
+    a.tutorAvatarUrl = (tutorMap[a.tutorId]||{}).avatarUrl
     return a
   })
   
