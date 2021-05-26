@@ -60,6 +60,8 @@ app.use('/api/user', usersRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/verification', verificationRouter);
 app.use('/api/pay', payRouter);
+
+app.use('/api/explore', exploreRouter);
 app.use('/api/courses', jwtMiddleware.checkLogin, coursesRouter);
 app.use('/api/appointments', jwtMiddleware.checkLogin, appointmentsRouter);
 
@@ -79,5 +81,8 @@ app.set('json replacer', function(key, value) {
 
   return value;
 });
+
+
+
 
 module.exports = app;
