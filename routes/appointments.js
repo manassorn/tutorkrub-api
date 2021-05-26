@@ -11,7 +11,7 @@ var format = require('date-fns-tz')
 router.get('/:appointmentId/message', async (req, res, next) => {
   // todo - check weather user is tutor or student
   const appointmentId = req.params.appointmentId
-  let messages = await crudController.readSub('appointment', appointmentId, 'message')
+  let messages = await crudController.readSub('Appointments', appointmentId, 'Messages')
   if(messages.length > 0) {
   const userIds = messages.map(m => m.from)
   const users = await crudController.whereIdIn('user', userIds)
@@ -36,7 +36,7 @@ router.post('/:appointmentId/message', async (req, res, next) => {
     text: req.body.text,
     from: userId
   }
-  const appointment = await crudController.createSub('appointment', appointmentId, 'message', payload)
+  const appointment = await crudController.createSub('Appointments', appointmentId, 'Messages', payload)
   api.responseOk(res, appointment)
 })
 
@@ -46,20 +46,20 @@ router.post('/course/:courseId', async (req, res, next) => {
   const startTime = req.body.startTime
   const length = req.body.length
   
-  const course = await crudController.readById('course', courseId)
+  const course = await crudController.readById('Courses', courseId)
   const tutorId = course.tutorId
   const payload = {
     courseId, startTime, length, tutorId, studentId, 
     status: 'to_be_paid' //to_be_accepted, to_be_started, complete
   }
-  const appointment = await crudController.create('appointment', payload)
+  const appointment = await crudController.create('Appointments', payload)
   
   api.responseOk(res, appointment)
   
 });
 
 router.get('/tutor/status/:status', async (req, res, next) => {
-  const snapshot = await firestoreService.firestore.collection('appointment').where('tutorId', '==', req.user.userId).where('status', '==', req.params.status).get()
+  const snapshot = await firestoreService.firestore.collection('Appointments').where('tutorId', '==', req.user.userId).where('status', '==', req.params.status).get()
   
   const appointments = snapshot.docs.map(doc => {
     const id = doc.id
@@ -70,12 +70,12 @@ router.get('/tutor/status/:status', async (req, res, next) => {
 })
 
 router.get('/student/status/:status', async (req, res, next) => {
-  let snapshot = await firestoreService.firestore.collection('appointment').where('studentId', '==', req.user.userId).where('status', '==', req.params.status).get()
+  let snapshot = await firestoreService.firestore.collection('Appointments').where('studentId', '==', req.user.userId).where('status', '==', req.params.status).get()
   let appointments = firestoreService.toList(snapshot)
 
   const courseIdList = appointments.map(a => a.courseId)
   
-  snapshot = await firestoreService.firestore.collection('course').where(admin.firestore.FieldPath.documentId(), 'in', courseIdList).get()
+  snapshot = await firestoreService.firestore.collection('Courses').where(admin.firestore.FieldPath.documentId(), 'in', courseIdList).get()
   var courses = firestoreService.toList(snapshot)
   const courseMap = {}
   courses.map(c => {

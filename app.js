@@ -21,7 +21,7 @@ var uploadRouter = require('./routes/upload');
 var verificationRouter = require('./routes/verification');
 var payRouter = require('./routes/pay');
 var coursesRouter = require('./routes/courses');
-var appointmentRouter = require('./routes/appointment');
+var appointmentsRouter = require('./routes/appointments');
 
 
 var app = express();
@@ -62,7 +62,7 @@ app.use('/api/upload', uploadRouter);
 app.use('/api/verification', verificationRouter);
 app.use('/api/pay', payRouter);
 app.use('/api/courses', coursesRouter);
-app.use('/api/appointment', jwtMiddleware.checkLogin, appointmentRouter);
+app.use('/api/appointments', jwtMiddleware.checkLogin, appointmentsRouter);
 
 app.get('*', function(req,res) {
   res.sendFile(path.resolve(path.join(__dirname, 'public', 'index.html')))
