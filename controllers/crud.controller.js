@@ -82,9 +82,9 @@ module.exports.join = (col1, col2, id1, id2, mapping) => {
       var col2Field = mapping[k]
       console.log(col1Field)
       console.log(col2Field)
-      console.log(col1[id1])
-      console.log((col2Map[col1[id1]] || {})[col2Field])
-      item[col1Field] = (col2Map[col1[id1]] || {})[col2Field]
+      console.log(item[id1])
+      console.log((col2Map[item[id1]] || {})[col2Field])
+      item[col1Field] = (col2Map[item[id1]] || {})[col2Field]
     }
     return item
   })
