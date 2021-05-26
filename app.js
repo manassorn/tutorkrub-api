@@ -20,6 +20,7 @@ var crudRouter = require('./routes/crud');
 var uploadRouter = require('./routes/upload');
 var verificationRouter = require('./routes/verification');
 var payRouter = require('./routes/pay');
+var exploreRouter = require('./routes/explore');
 var coursesRouter = require('./routes/courses');
 var appointmentsRouter = require('./routes/appointments');
 
