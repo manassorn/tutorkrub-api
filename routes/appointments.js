@@ -14,7 +14,7 @@ router.get('/:appointmentId/message', async (req, res, next) => {
   let messages = await crudController.readSub('Appointments', appointmentId, 'Messages')
   if(messages.length > 0) {
   const userIds = messages.map(m => m.from)
-  const users = await crudController.whereIdIn('user', userIds)
+  const users = await crudController.whereIdIn('Users', userIds)
   const userMap = crudController.listToMap(users, 'id')
   messages = messages.map(m => {
     //m.timestamp = m.timestamp.toDate()
