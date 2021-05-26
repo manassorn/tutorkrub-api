@@ -55,13 +55,12 @@ app.use(jwtMiddleware.extractUser);
 
 app.use('/', indexRouter);
 app.use('/api/authen', authenRouter);
-//app.use('/api/user', authenRouter.authenticateJWT);
 app.use('/api/user', usersRouter);
-app.use('/api/crud', crudRouter);
+//app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/verification', verificationRouter);
 app.use('/api/pay', payRouter);
-app.use('/api/courses', coursesRouter);
+app.use('/api/courses', jwtMiddleware.checkLogin, coursesRouter);
 app.use('/api/appointments', jwtMiddleware.checkLogin, appointmentsRouter);
 
 app.get('*', function(req,res) {
@@ -80,8 +79,5 @@ app.set('json replacer', function(key, value) {
 
   return value;
 });
-
-
-
 
 module.exports = app;
