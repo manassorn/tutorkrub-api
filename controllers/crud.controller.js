@@ -74,16 +74,10 @@ module.exports.join = (col1, col2, id1, id2, mapping) => {
     col2Map[item[id2]] = item
   })
   
-  console.log(col2Map)
-  
   var newCol = col1.map(item => {
     for(k in mapping) {
       var col1Field = k
       var col2Field = mapping[k]
-      console.log(col1Field)
-      console.log(col2Field)
-      console.log(item[id1])
-      console.log((col2Map[item[id1]] || {})[col2Field])
       item[col1Field] = (col2Map[item[id1]] || {})[col2Field]
     }
     return item
