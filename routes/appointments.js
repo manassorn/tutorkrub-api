@@ -29,7 +29,7 @@ router.get('/:appointmentId/message', async (req, res, next) => {
 
 router.post('/:appointmentId/message', async (req, res, next) => {
   // todo - check weather user is tutor or student
-  const userId = req.user.userId  
+  const userId = req.user.id  
   const appointmentId = req.params.appointmentId
   const payload = {
     timestamp: new Date(),
@@ -41,7 +41,7 @@ router.post('/:appointmentId/message', async (req, res, next) => {
 })
 
 router.post('/course/:courseId', async (req, res, next) => {
-  const studentId = req.user.userId  
+  const studentId = req.user.id  
   const courseId = req.params.courseId
   const startTime = req.body.startTime
   const length = req.body.length
@@ -58,45 +58,34 @@ router.post('/course/:courseId', async (req, res, next) => {
   
 });
 
-router.get('/tutor/status/:status', async (req, res, next) => {
-  const snapshot = await firestoreService.firestore.collection('Appointments').where('tutorId', '==', req.user.userId).where('status', '==', req.params.status).get()
-  
-  const appointments = snapshot.docs.map(doc => {
-    const id = doc.id
-    const data = doc.data()
-    return { id, ...data }
-  });
-  return appointments;
+router.get('/teach', async (req, res, next) => {
+  var userId = req.user.id
+  var status = req.params.status
+
+  const appointments = await crudController.readBy2('Appointments','tutorId',userId,'status',status)
+  return appointments
 })
 
-router.get('/student/status/:status', async (req, res, next) => {
-  let snapshot = await firestoreService.firestore.collection('Appointments').where('studentId', '==', req.user.userId).where('status', '==', req.params.status).get()
-  let appointments = firestoreService.toList(snapshot)
+router.get('/study', async (req, res, next) => {
+  var userId = req.user.id
+  var status = req.params.status
+  
+  var appointments = await crudController.readById('Appointments','studentId',userId,'status',status)
 
   const courseIdList = appointments.map(a => a.courseId)
+  var courses = crudController.whereIdIn(courseIdList)
   
-  snapshot = await firestoreService.firestore.collection('Courses').where(admin.firestore.FieldPath.documentId(), 'in', courseIdList).get()
-  var courses = firestoreService.toList(snapshot)
   const courseMap = {}
   courses.map(c => {
     courseMap[c.id] = c.title
   })
   
   const tutorIdList = appointments.map(a => a.tutorId)
-  
   const tutors = await userController.getByIdList(tutorIdList)
-  const tutorMap = {}
-  tutors.map(t => {
-    tutorMap[t.id] = {name: t.name, avatarUrl: t.avatarUrl}
-  })
   
+  appointments = crudController.join(appointments, courses, 'courseId', 'id', {'courseTitle': 'title'})
   
-  appointments = appointments.map(a => {
-    a.courseName = courseMap[a.courseId]
-    a.tutorName = (tutorMap[a.tutorId]||{}).name
-    a.tutorAvatarUrl = (tutorMap[a.tutorId]||{}).avatarUrl
-    return a
-  })
+  appointments = crudController.join(appointments, tutors, 'tutorId', 'id', {'tutorName': 'name', 'tutorAvatarUrl':'avatarUrl'})
   
   api.responseOk(res, appointments)
   

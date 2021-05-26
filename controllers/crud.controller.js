@@ -31,6 +31,11 @@ module.exports.readBy = async (collection, field, value) => {
   return data;
 }
 
+module.exports.readBy2 = async (collection, field1, value1, field2, value2) => {
+  const data = await firestoreService.readBy2(collection, field1, value1, field2, value2)
+  return data;
+}
+
 module.exports.readById = async (collection, id) => {
   const data = await firestoreService.readById(collection, id)
   return data;
@@ -59,4 +64,23 @@ module.exports.listToMap = (list, key = 'id') => {
     m[item[key]] = item
   })
   return m
+}
+
+module.exports.join = (col1, col2, id1, id2, mapping) => {
+  
+  const col2Map = {}
+  col2.map(item => {
+    col2Map[item[id2]] = item
+  })
+  
+  var newCol = col1.map(item => {
+    for(k in mapping) {
+      var col1Field = k
+      var col2Field = mapping[k]
+      item[col1Field] = (col2Map[col1[id1]] || {})[col2Field]
+    }
+    return item
+  })
+  
+  return newCol
 }

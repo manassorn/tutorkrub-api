@@ -46,6 +46,12 @@ router.get('/mine', async (req, res, next) => {
   api.ok(res, courses)
 });
 
+router.get('/', async (req, res, next) => {
+  var userId = req.user.id
+  var courses = await coursesController.listByOwner(userId)
+  api.ok(res, courses)
+});
+
 router.get('/:id', async (req, res, next) => {
   var id = req.params.id
   var course = await coursesController.get(id)

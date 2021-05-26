@@ -57,6 +57,11 @@ module.exports.readBy = async (collection, fieldName, fieldValue) => {
   return toList(snapshot)
 };
 
+module.exports.readBy2 = async (collection, field1, value1, field2, value2) => {
+  const snapshot = await firestore.collection(collection).where(field1, '==', value1).where(field2, '==', value2).get()
+  return toList(snapshot)
+};
+
 
 module.exports.readById = async (collection, id) => {
   const doc = await firestore.collection(collection).doc(id).get()
