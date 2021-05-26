@@ -77,6 +77,7 @@ router.get('/study', async (req, res, next) => {
   
   const tutorIdList = appointments.map(a => a.tutorId)
   const tutors = await userController.getByIdList(tutorIdList)
+  console.log(tutors)
   
   appointments = crudController.join(appointments, courses, 'courseId', 'id', {'courseTitle': 'title'})
   
