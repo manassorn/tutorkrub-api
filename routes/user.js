@@ -47,14 +47,10 @@ router.post('/:id/email', async (req, res, next) => {
   api.responseOk(res)
 });
 
-router.post('/:id/availableHours', async (req, res, next) => {
+router.post('/me/availability', async (req, res, next) => {
   
-  const hours = req.body.availableHours
-  const encode = hours.map(d => d.map(h => h? 1 :0).join('')).join(' ')
-  const payload = {
-    availableHours: encode
-  }
-  await crudController.update('user', req.params.id, payload)
+  const availability = req.body.availability
+  await crudController.update('user', req.user.id, {availability})
   api.responseOk(res)
 });
 
@@ -73,10 +69,10 @@ router.get('/me', async (req, res, next) => {
   }
 });
 
-router.get('/:id/availableHours', async (req, res, next) => {
+router.get('/me/availability', async (req, res, next) => {
 
-  const user = await crudController.readById('user', req.params.id)
-  api.responseOk(res, user.availableHours)
+  const user = await crudController.readById('user', req.user.id)
+  api.responseOk(res, user.availability)
 });
 
 module.exports = router;
