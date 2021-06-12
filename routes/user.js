@@ -47,6 +47,16 @@ router.post('/:id/email', async (req, res, next) => {
   api.responseOk(res)
 });
 
+router.post('/me', async (req, res, next) => {
+
+  const data = {}
+  if(req.body.skypeId) {
+    data.skypeId = req.body.skypeId
+  }
+  await crudController.update('Users', req.user.id, data)
+  api.responseOk(res)
+});
+
 router.post('/me/availability', async (req, res, next) => {
   
   const availability = req.body.availability
