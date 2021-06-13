@@ -6,6 +6,11 @@ var verificationController = require('../controllers/verification.controller')
 var crudController = require('../controllers/crud.controller')
 var userController = require('../controllers/user.controller')
 
+var s3 = require('../services/s3.service')
+const multer = require('multer')
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
+
 router.post('/', async(req, res, next) => {
   /*var passed = await verificationController.verifyForEmail(req.body.email, req.body.code)
   if(passed === false) {
@@ -87,5 +92,12 @@ router.get('/me/availability', async (req, res, next) => {
   const user = await crudController.readById('Users', req.user.id)
   api.responseOk(res, user.availability)
 });
+
+router.post('/me/avatar', upload.single('file'), function(req, res, next) {
+  s3.upload(req.file.buffer).then((avatarUrl) => {
+    crudController.update('Users', req.user.id, {avatarUrl})
+  })
+  api.responseOk(res)
+})
 
 module.exports = router;
