@@ -53,6 +53,9 @@ router.post('/me', async (req, res, next) => {
   if(req.body.skypeId) {
     data.skypeId = req.body.skypeId
   }
+  if (req.body.zoomId) {
+    data.skypeId = req.body.zoomId
+  }
   await crudController.update('Users', req.user.id, data)
   api.responseOk(res)
 });
