@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const loginAccountSchema = new Schema({
@@ -10,4 +10,4 @@ const loginAccountSchema = new Schema({
 
 const LoginAccount = mongoose.model('LoginAccount', loginAccountSchema);
 
-module.exports.LoginAccount = LoginAccount
+module.exports = LoginAccount
