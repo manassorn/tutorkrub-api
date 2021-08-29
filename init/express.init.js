@@ -63,7 +63,7 @@ app.use('/api/courses', jwtMiddleware.checkLogin, coursesRouter);
 app.use('/api/appointments', jwtMiddleware.checkLogin, appointmentsRouter);
 
 app.get('*', function(req,res) {
-  res.sendFile(path.resolve(path.join(__dirname, 'public', 'index.html')))
+  res.sendFile(path.resolve(path.join(__dirname, '../public', 'index.html')))
 });
 // app.get('/user', express.static(path.join(__dirname, 'public') + '/index.html'));
 
