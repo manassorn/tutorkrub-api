@@ -46,7 +46,7 @@ app.use(cookieParser());
 }*/
 // app.use(session(sess))
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(jwtMiddleware.extractUser);
 
