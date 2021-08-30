@@ -7,5 +7,5 @@ module.exports.getUserByEmailPassword = async (email, pwd) => {
 
 module.exports.create = async (data) => {
   const user = new User(data)
-  await user.save()
+  return await user.save()
 }
