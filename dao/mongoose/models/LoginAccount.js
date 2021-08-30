@@ -1,3 +1,4 @@
+const bcrypt = rrquire('bcrypt')
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
