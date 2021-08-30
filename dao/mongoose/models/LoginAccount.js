@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const loginAccountSchema = new Schema({
   //_id: Schema.Types.ObjectId,
-  email: String,
+  email: {type: String, required: true},
   password:   String,
   user: { type: Schema.Types.ObjectId, ref: 'User', localField: 'userId' }
 });
