@@ -11,8 +11,8 @@ try {
     uri.replace('user',user).replace('pass',pass),
     { useNewUrlParser: true, useUnifiedTopology: true },
     (err) => {
-      if (error) {
-        console.error("Mongoose is not connected", error)
+      if (err) {
+        console.error("Mongoose is not connected", err)
       } else {
         console.log("Mongoose is connected")
       }
