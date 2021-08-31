@@ -1,15 +1,10 @@
-var firestoreService = require('../services/firestore.service')
-var sendgrid = require('../services/sendgrid.service')
-var crudController = require('./crud.controller')
-var admin = require('firebase-admin');
+var loginAccountDao = require('../dao/LoginAccountDao')
+var userDao = require('../dao/UserDao')
 
 
 module.exports.login = async (email, pwd) => {
-  var snapshot = await firestoreService.firestore.collection('LoginAccounts').where('email', '==', email).where('pwd', '==', pwd).get()
-  
-  var accounts = firestoreService.toList(snapshot)
-  if (accounts.length == 0) return undefined
-  var userId = accounts[0].userId
-  var user = await crudController.readById('Users', userId)
-  return user
+  const loginAccount = loginAccountDao.getByEmail(email)
+  const match = await loginAccount.comparePassword(pwd)
+  if(!match) return
+  else return loginAccount.user
 }
