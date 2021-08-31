@@ -1,7 +1,7 @@
 const LoginAccount = require('./mongoose/models/LoginAccount')
 
 module.exports.getByEmail = async (email, pwd) => {
-  const loginAccount = await LoginAccount.findOne({'email': email}).populate('user').exec()
+  const loginAccount = await LoginAccount.findOne({'email': email}).populate('user')
   return loginAccount
 }
 
