@@ -10,19 +10,20 @@ const loginAccountSchema = new Schema({
 });
 
 
-loginAccountSchema.pre('save', function(next) { 
+loginAccountSchema.pre('save', async function(next) { 
   // only hash the password if it has been modified (or is new) 
   console.log(this.password)
-  if (!this.isModified('password')) { return next(); } 
-  // generate a salt 
-  return bcrypt.genSalt(10, function(error, salt) { if (error) { return next(error); } 
-  console.log(this.password)
-  // hash the password using the new salt 
-    return bcrypt.hash(this.password, salt, function(error, hash) { if (error) { return next(error); } 
-      // override the cleartext password with the hashed one 
-      this.password = hash; return next(); }); 
-    
-  }); 
+  if (!this.isModified('password')) { 
+    return next();
+  } 
+  try {
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(this.password, salt)
+    this.password = hash
+    return next()
+  } catch (error) {
+    return
+  }
   
 }); 
 
