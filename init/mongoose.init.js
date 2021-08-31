@@ -11,12 +11,11 @@ try {
     uri.replace('user',user).replace('pass',pass),
     { useNewUrlParser: true, useUnifiedTopology: true },
     (err) => {
-      console.log(err)
-      console.log("Mongoose is connected")
-      const LoginAccountDao = require('../dao/LoginAccountDao')
-      LoginAccountDao.getUserByEmailPassword('m@m.com','pass')
-        .then(result => console.log(result))
-        .catch(err => console.log(err))
+      if (error) {
+        console.error("Mongoose is not connected", error)
+      } else {
+        console.log("Mongoose is connected")
+      }
     }
   );
 } catch (e) {
