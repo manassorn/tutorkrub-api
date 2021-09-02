@@ -4,10 +4,12 @@ var router = express.Router();
 var api = require('./api')
 var crudController = require('../controllers/crud.controller')
 var coursesController = require('../controllers/courses.controller')
+var courseController = require('../controllers/course.controller')
 
 
 
 router.post('/', async (req, res, next) => {
+  await courseController.create(req.body)
   const title = req.body.title
   const description = req.body.description
   const schoolLevel = req.body.schoolLevel

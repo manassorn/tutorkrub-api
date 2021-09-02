@@ -6,3 +6,5 @@ class DaoController {
     return await this.dao.create(dsta)
   }
 }
+
+module.exports = DaoController

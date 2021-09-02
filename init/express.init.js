@@ -1,6 +1,5 @@
 const path = require("path");
-//var express = require('express');
-import express from 'express'
+var express = require('express');
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
 // var session = require('express-session');
