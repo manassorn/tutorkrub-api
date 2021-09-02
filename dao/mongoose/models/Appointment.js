@@ -1,8 +1,7 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const appointmentSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   course: { type: Schema.Types.ObjectId, ref: 'Course', localField: 'courseId' },
   startTime: Date,
   period: Number,
@@ -15,4 +14,4 @@ const appointmentSchema = new Schema({
 
 const Appointment = mongoose.model('Appointment', appointmentSchema);
 
-module.exports.Appointment = Appointment
+module.exports = Appointment
