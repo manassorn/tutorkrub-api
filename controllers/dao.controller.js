@@ -3,7 +3,7 @@ class DaoController {
     this.dao = dao
   }
   async create(data) {
-    return await this.dao.create(dsta)
+    return await this.dao.create(data)
   }
 }
 
