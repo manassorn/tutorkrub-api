@@ -15,3 +15,8 @@ module.exports.create = async (data) => {
   return await course.save()
 }
 
+module.exports.findByIdAndUpdate = async (courseId, update) => {
+  const course = await Course.findByIdAndUpdate(courseId, update).exec()
+  return course
+}
+

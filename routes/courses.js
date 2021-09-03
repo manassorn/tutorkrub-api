@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
 
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:courseId', async (req, res, next) => {
   const courseId = req.params.id
   const title = req.body.title
   const description = req.body.description
@@ -38,7 +38,10 @@ router.put('/:id', async (req, res, next) => {
 
   const payload = { title, description, schoolLevel, subject, price, tutorId }
 
-  const course = await crudController.update('Courses', courseId, payload)
+  let course = await crudController.update('Courses', courseId, payload)
+  
+  course =  courseController.findByIdAndUpdate(req.params.courseId, req.body)
+
 
   api.ok(res, course)
 
@@ -51,7 +54,6 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:id', async (req, res, next) => {
-  console.log(req.params.id)
   const course = await courseController.get(req.params.id)
     console.log(course)
 
