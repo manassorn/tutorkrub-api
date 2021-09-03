@@ -51,6 +51,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:id', async (req, res, next) => {
+  console.log(req.param.id)
   const course = await courseController.get(req.param.id)
     console.log(course)
 
