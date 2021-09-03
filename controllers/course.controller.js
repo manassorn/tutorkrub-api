@@ -5,6 +5,10 @@ class CourseController extends DaoController {
   constructor() {
     super(courseDao)
   }
+  
+  async getListByOwner(tutorId) {
+    return await this.dao.getListByOwner(tutorId)
+  }
 }
 
 module.exports = courseController = new CourseController()
