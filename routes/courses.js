@@ -47,7 +47,7 @@ router.put('/:id', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   var userId = req.user.id
   var courses = await coursesController.listByOwner(userId)
-  courses = courseController.getListByOwner(userId)
+  courses = await courseController.getListByOwner(userId)
 
   api.ok(res, courses)
 });
