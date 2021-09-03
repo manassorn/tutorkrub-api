@@ -46,6 +46,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   const courses = await courseController.getListByOwner(req.user.id)
+  console.log(courses)
 
   api.ok(res, courses)
 });
