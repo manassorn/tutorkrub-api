@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const { Schema } = mongoose;
 
 const user = process.env.MONGODB_ATLAS_USER
 const pass = process.env.MONGODB_ATLAS_PASS
@@ -15,6 +16,10 @@ try {
         console.error("Mongoose is not connected", err)
       } else {
         console.log("Mongoose is connected")
+      
+        // Duplicate the ID field. 
+        Schema.virtual('id').get(function(){ return this._id.toHexString(); }); // Ensure virtual fields are serialised. 
+        Schema.set('toJSON', { virtuals: true });
       }
     }
   );
