@@ -8,6 +8,8 @@ const courseSchema = new Schema({
   subject: String,
   level: String,
   tutor: { type: Schema.Types.ObjectId, ref: 'User', localField: 'tutorId' }
+}, {
+  toJSON: {virtuals: true}
 });
 
 const Course = mongoose.model('Course', courseSchema);
