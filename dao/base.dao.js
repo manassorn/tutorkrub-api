@@ -11,4 +11,4 @@ class BaseDao {
   }
 }
 
-module.exportd = BaseDao
+module.exports = BaseDao
