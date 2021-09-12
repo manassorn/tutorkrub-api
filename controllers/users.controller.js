@@ -1,7 +1,7 @@
 const DaoController = require('./dao.controller')
 const usersDao = require('../dao/users.dao')
 
-class CoursesController extends DaoController {
+class UsersController extends DaoController {
   constructor() {
     super(usersDao)
   }
@@ -11,4 +11,4 @@ class CoursesController extends DaoController {
   }
 }
 
-module.exports = coursesController = new CoursesController()
+module.exports = usersController = new UsersController()
