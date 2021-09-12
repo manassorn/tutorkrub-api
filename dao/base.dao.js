@@ -10,3 +10,5 @@ class BaseDao {
     return await model.save()
   }
 }
+
+module.exportd = BaseDao
