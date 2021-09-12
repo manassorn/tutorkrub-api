@@ -10,7 +10,8 @@ var jwtMiddleware = require('../middlewares/jwt.middleware')
 
 var indexRouter = require('../routes/index');
 var authenRouter = require('../routes/authen');
-var usersRouter = require('../routes/user');
+var usersRouter = require('../routes/users');
+var userRouter = require('../routes/user');
 var crudRouter = require('../routes/crud');
 var uploadRouter = require('../routes/upload');
 var verificationRouter = require('../routes/verification');
@@ -53,7 +54,8 @@ app.use(jwtMiddleware.extractUser);
 
 app.use('/', indexRouter);
 app.use('/api/authen', authenRouter);
-app.use('/api/user', usersRouter);
+app.use('/api/user', userRouter);
+app.use('/api/users', usersRouter);
 //app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/verification', verificationRouter);
