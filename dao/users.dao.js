@@ -7,3 +7,6 @@ class UsersDao extends BaseDao {
     super(User)
   }
 }
+
+const usersDao = new UsersDao()
+module.exports = usersDao
