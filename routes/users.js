@@ -4,7 +4,6 @@ var router = express.Router();
 var api = require('./api')
 var verificationController = require('../controllers/verification.controller')
 var crudController = require('../controllers/crud.controller')
-var userController = require('../controllers/user.controller')
 var usersController = require('../controllers/users.controller')
 
 var s3 = require('../services/s3.service')
