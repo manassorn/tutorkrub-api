@@ -41,17 +41,15 @@ router.post('/:appointmentId/message', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
+
   const studentId = req.user.id 
   const appointment = req.body
   appointment.student = studentId
+  appointment.status = 'tobepaid'
   
+  const course = await coursesController.get(req.body.courseId)
+appointment.tutor = course.tutor  
   
-  const course = await crudController.readById('Courses', courseId)
-  const tutorId = course.tutorId
-  const payload = {
-    courseId, startTime, length, tutorId, studentId, 
-    status: 'to_be_paid' //to_be_accepted, to_be_started, complete
-  }
   const appointment = await appointmentsController.create('Appointments', payload)
   
   api.responseOk(res, appointment)
