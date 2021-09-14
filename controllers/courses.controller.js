@@ -1,14 +1,20 @@
 const DaoController = require('./dao.controller')
-const courseDao = require('../dao/course.dao')
+const coursesDao = require('../dao/courses.dao')
 
 class CoursesController extends DaoController {
   constructor() {
-    super(courseDao)
+    super(coursesDao)
   }
   
   async getListByOwner(tutorId) {
     return await this.dao.getListByOwner(tutorId)
   }
+  
+  async getAll() {
+    return await this.dao.getAll()
+
+  }
+  
 }
 
 module.exports = coursesController = new CoursesController()

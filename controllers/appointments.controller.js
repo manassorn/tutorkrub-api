@@ -1,9 +1,9 @@
 const DaoController = require('./dao.controller')
-const appointmentDao = require('../dao/appointment.dao')
+const appointmentsDao = require('../dao/appointments.dao')
 
-class AppointmentController extends DaoController {
+class AppointmentsController extends DaoController {
   constructor() {
-    super(appointmentDao)
+    super(appointmentsDao)
   }
 
   async findByAttendee(userId) {
@@ -11,4 +11,4 @@ class AppointmentController extends DaoController {
   }
 }
 
-module.exports = appointmentController = new AppointmentController()
+module.exports = appointmentsController = new AppointmentsController()
