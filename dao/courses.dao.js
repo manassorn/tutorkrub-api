@@ -7,7 +7,7 @@ class CoursesDao extends BaseDao {
   }
   
   async getListByOwner(tutorId) {
-    const courses = await Course.find({'tutor': tutorId}).exec()
+    const courses = await Course.find({'tutor': tutorId}).populate('tutor').exec()
     return courses
   }
   
