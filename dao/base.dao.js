@@ -10,6 +10,7 @@ class BaseDao {
     return await model.save()
   }
   async get(id) {
+    console.log('bbb')
     return await this.Model.findById(id).exec()
   }
 }
