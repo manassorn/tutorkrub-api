@@ -5,7 +5,7 @@ const userSchema = new Schema({
   //_id: Schema.Types.ObjectId,
   username: String,
   name: {type: String, required: true},
-  avatarUrl: Number,
+  avatarUrl: String,
   skypeId: String,
   zoomId: String,
 });
