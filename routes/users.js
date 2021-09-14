@@ -54,7 +54,8 @@ router.get('/me/availability', async (req, res, next) => {
 
 router.post('/me/avatar', upload.single('file'), function(req, res, next) {
   s3.upload(req.file.buffer).then((avatarUrl) => {
-    crudController.update('Users', req.user.id, {avatarUrl})
+    
+    usersController.updateAvatarUrl(req.user.id, avatarUrl)
   })
   api.responseOk(res)
 })

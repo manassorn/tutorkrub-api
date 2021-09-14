@@ -9,6 +9,10 @@ class UsersController extends DaoController {
   async getAvailability(tutorId) {
     return await this.dao.getAvailability(tutorId)
   }
+  
+  async updateAvatarUrl(userId, avatarUrl) {
+    return await this.dao.updateAvatarUrl(userId, avatarUrl)
+  }
 }
 
 module.exports = usersController = new UsersController()
