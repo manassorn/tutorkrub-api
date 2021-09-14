@@ -3,7 +3,6 @@ var router = express.Router();
 
 var api = require('./api')
 var crudController = require('../controllers/crud.controller')
-var userController = require('../controllers/user.controller')
 var firestoreService = require('../services/firestore.service')
 var admin = require('firebase-admin')
 var format = require('date-fns-tz')
