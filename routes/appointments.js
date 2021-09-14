@@ -40,11 +40,11 @@ router.post('/:appointmentId/message', async (req, res, next) => {
   api.responseOk(res, appointment)
 })
 
-router.post('/course/:courseId', async (req, res, next) => {
-  const studentId = req.user.id  
-  const courseId = req.params.courseId
-  const startTime = req.body.startTime
-  const length = req.body.length
+router.post('/', async (req, res, next) => {
+  const studentId = req.user.id 
+  const appointment = req.body
+  appointment.student = studentId
+  
   
   const course = await crudController.readById('Courses', courseId)
   const tutorId = course.tutorId
@@ -52,38 +52,20 @@ router.post('/course/:courseId', async (req, res, next) => {
     courseId, startTime, length, tutorId, studentId, 
     status: 'to_be_paid' //to_be_accepted, to_be_started, complete
   }
-  const appointment = await crudController.create('Appointments', payload)
+  const appointment = await appointmentsController.create('Appointments', payload)
   
   api.responseOk(res, appointment)
   
 });
 
-router.get('/teach', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   var userId = req.user.id
-  var status = req.params.status
 
-  const appointments = await crudController.readBy2('Appointments','tutorId',userId,'status',status)
+  const appointments = await appointmentsController.findByAttendee(userId)
   return appointments
 })
 
-router.get('/study', async (req, res, next) => {
-  var userId = req.user.id
-  var status = req.query.status
-  
-  var appointments = await crudController.readBy2('Appointments','studentId',userId,'status',status)
 
-  const courseIdList = appointments.map(a => a.courseId)
-  var courses = await crudController.whereIdIn('Courses', courseIdList)
-  
-  const tutorIdList = appointments.map(a => a.tutorId)
-  const tutors = await userController.getByIdList(tutorIdList)
-  
-  appointments = crudController.join(appointments, courses, 'courseId', 'id', {'courseTitle': 'title'})
-  
-  appointments = crudController.join(appointments, tutors, 'tutorId', 'id', {'tutorName': 'name', 'tutorAvatarUrl':'avatarUrl'})
-  
-  api.responseOk(res, appointments)
-  
-})
+
 
 module.exports = router
