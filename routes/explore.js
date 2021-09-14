@@ -5,8 +5,7 @@ var api = require('./api')
 var coursesController = require('../controllers/courses.controller')
 
 router.get('/', async (req, res) => {
-  var courses = await crudController.read('Courses')
-  courses = await crudController.joinById(courses,'Users','tutorId','id',{'tutorAvatarUrl':'avatarUrl'})
+  var courses = await coursesController.getAll()
   api.ok(res, courses)
 })
 
