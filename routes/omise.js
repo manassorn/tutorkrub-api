@@ -7,7 +7,7 @@ var omise = require('omise')({
   'omiseVersion': '2015-09-10' 
 });
 
-router.post('/charge', async (req, res, next) => {
+router.post('/charge/promptpay', async (req, res, next) => {
   const resp = await omise.charges.create({ 
     'description': 'Charge for order ID: 888', 
     'amount': req.body.amount, 
