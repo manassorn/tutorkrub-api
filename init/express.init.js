@@ -19,6 +19,7 @@ var exploreRouter = require('../routes/explore');
 var coursesRouter = require('../routes/courses');
 var appointmentsRouter = require('../routes/appointments');
 var registerRouter = require('../routes/register');
+var omiseRouter = require('../routes/omise');
 
 
 
