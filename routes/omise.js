@@ -8,6 +8,7 @@ var omise = require('omise')({
 });
 
 router.post('/charge/promptpay', async (req, res, next) => {
+  try {
   const resp = await omise.charges.create({ 
     'description': 'Charge for order ID: 888', 
     'amount': req.body.amount, 
@@ -17,6 +18,9 @@ router.post('/charge/promptpay', async (req, res, next) => {
   const qrUri = resp.source.scannable_code.image.download_uri
 
   api.ok(res, {qrUri})
+  } catch (err) {
+    console.log(err)
+  }
 
 });
 
