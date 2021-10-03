@@ -4,11 +4,12 @@ var router = express.Router();
 var api = require('./api')
 var omise = require('omise')({ 
   'secretKey': process.env.OMISE_SKEY, 
-  'omiseVersion': '2015-09-10' 
+  'omiseVersion': '2017-11-02' 
 });
 
 router.post('/charge/promptpay', async (req, res, next) => {
   try {
+    console.log(req.body.sourceId)
   const resp = await omise.charges.create({ 
     'description': 'Charge for order ID: 888', 
     'amount': req.body.amount, 
