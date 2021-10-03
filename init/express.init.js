@@ -64,6 +64,7 @@ app.use('/api/explore', exploreRouter);
 app.use('/api/courses', jwtMiddleware.checkLogin, coursesRouter);
 app.use('/api/appointments', jwtMiddleware.checkLogin, appointmentsRouter);
 app.use('/api/register', registerRouter);
+app.use('/api/omise', omiseRouter);
 
 app.get('*', function(req,res) {
   res.sendFile(path.resolve(path.join(__dirname, '../public', 'index.html')))
