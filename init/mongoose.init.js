@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const user = process.env.MONGODB_ATLAS_USER
 const pass = process.env.MONGODB_ATLAS_PASS
 const host = process.env.MONGODB_ATLAS_HOST
-const dbName = peocess.env.MONGODB_ATLAS_DBNAME
+const dbName = process.env.MONGODB_ATLAS_DBNAME
 const a =
   "mongodb+srv://user:pass@cluster0.wsexn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const uri ="mongodb+srv://user:pasd@host/dbname?retryWrites=true&w=majority"
