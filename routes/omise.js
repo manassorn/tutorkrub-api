@@ -35,5 +35,14 @@ router.post('/webhook', async (req, res, next) => {
 
 });
 
+router.get('/webhook', async (req, res, next) => {
+  try {
+  api.ok(res, 'ok')
+  } catch (err) {
+    console.log(err)
+  }
+
+});
+
 
 module.exports = router
