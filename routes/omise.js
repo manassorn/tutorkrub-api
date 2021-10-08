@@ -25,5 +25,15 @@ router.post('/charge/promptpay', async (req, res, next) => {
 
 });
 
+router.post('/webhook', async (req, res, next) => {
+  try {
+    console.log(req.body)
+  api.ok(res)
+  } catch (err) {
+    console.log(err)
+  }
+
+});
+
 
 module.exports = router
