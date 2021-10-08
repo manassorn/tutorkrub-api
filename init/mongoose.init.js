@@ -6,7 +6,7 @@ const host = process.env.MONGODB_ATLAS_HOST
 const dbName = process.env.MONGODB_ATLAS_DBNAME
 const a =
   "mongodb+srv://user:pass@cluster0.wsexn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const uri ="mongodb+srv://user:pasd@host/dbname?retryWrites=true&w=majority"
+const uri ="mongodb+srv://user:pass@host/dbname?retryWrites=true&w=majority"
 try {
   // Connect to the MongoDB cluster
   console.log(uri.replace('user',user).replace('pass',pass).replace('host',host).replace('dbname',dbName),)
