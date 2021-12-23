@@ -3,9 +3,7 @@ var router = express.Router();
 
 var api = require('./api')
 var crudController = require('../controllers/crud.controller')
-var firestoreService = require('../services/firestore.service')
-var admin = require('firebase-admin')
-var format = require('date-fns-tz')
+var appointmentsController = require('../controllers/appointments.controller')
 
 router.get('/:appointmentId/message', async (req, res, next) => {
   // todo - check weather user is tutor or student
