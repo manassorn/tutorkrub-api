@@ -47,7 +47,7 @@ router.post('/', async (req, res, next) => {
   const course = await coursesController.get(req.body.courseId)
 appointment.tutor = course.tutor  
   
-  const appointment2 = await appointmentsController.create('Appointments', appointment)
+  const appointment2 = await appointmentsController.create(appointment)
   
   api.responseOk(res, appointment2)
   
