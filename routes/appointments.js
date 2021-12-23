@@ -56,7 +56,9 @@ appointment.tutor = course.tutor
 router.get('/', async (req, res, next) => {
   var userId = req.user.id
 
+console.log('fffff')
   const appointments = await appointmentsController.findByAttendee(userId)
+  console log('hhhh')
   return appointments
 })
 
