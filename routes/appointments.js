@@ -58,7 +58,7 @@ router.get('/', async (req, res, next) => {
 
 console.log('fffff')
   const appointments = await appointmentsController.findByAttendee(userId)
-  console log('hhhh')
+  console.log('hhhh')
   return appointments
 })
 
