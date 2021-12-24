@@ -41,8 +41,9 @@ router.post('/', async (req, res, next) => {
 
   const studentId = req.user.id 
   const appointment = req.body
+  appointment.course = req.body.courseId
   appointment.student = studentId
-  appointment.status = 'tobepaid'
+  appointment.status = 'newlycreated'
   
   const course = await coursesController.get(req.body.courseId)
 appointment.tutor = course.tutor  
