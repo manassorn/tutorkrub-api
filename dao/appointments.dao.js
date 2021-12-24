@@ -9,6 +9,8 @@ class AppointmentDao extends BaseDao {
   async findByAttendee(userId) {
     return await Appointment.find()
     .or({tutor: userId}, {student: userId})
+    .populate('tutor').populate('course')
+    .exec()
   }
 }
 
