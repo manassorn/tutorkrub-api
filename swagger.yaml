@@ -1,0 +1,529 @@
+swagger: '2.0'
+info:
+  description: TutorKrub API
+  version: 1.0.0
+  title: TutorKrub API
+  contact:
+    email: support@tutorkrub.com
+# host: petstore.swagger.io
+# basePath: /v2
+tags:
+  - name: loginAccount
+    description: ...
+  - name: user
+    description: ...
+  - name: tutor
+    description: ...
+  - name: appointment
+    description: ...
+  - name: course
+    description: ...
+# schemes:
+# - http
+paths:
+  /register/:
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/registerModel'
+      responses:
+        200:
+          description: ok
+  /register/fb:
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+      responses:
+        200:
+          description: ok
+
+  /login:
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: ok
+  /logout:
+    get:
+      parameters: []
+      responses:
+        200:
+          description: ok
+  /loginaccounts/{accountId}/email:
+    put:
+      tags:
+        - loginAccount
+      parameters:
+        - in: path
+          name: accountId
+          type: string
+          required: true
+      responses:
+        200:
+          description: ok
+  /loginaccounts/{accountId}/password:
+    put:
+      tags:
+        - loginAccount
+      parameters:
+        - in: path
+          name: accountId
+          type: string
+          required: true
+      responses:
+        200:
+          description: ok
+
+  /users/me:
+    put:
+      tags:
+        - user
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/user'
+      responses:
+        200:
+          description: ok
+        401:
+          description: unauthorized
+    get:
+      tags:
+        - user
+      parameters: []
+      responses:
+        200:
+          description: ok
+        401:
+          description: unauthorized
+  /users/me/avatar:
+    post:
+      tags:
+        - user
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: file
+          type: file
+      responses:
+        200:
+          description: ok
+  /users/me/availability:
+    put:
+      tags:
+        - user
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/availability'
+      responses:
+        200:
+          description: ok
+    get:
+      tags:
+        - user
+      parameters: []
+      responses:
+        200:
+          description: ok
+        401:
+          description: unauthorized
+  /tutors:
+    post:
+      tags:
+        - tutor
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TutorRegistration'
+      responses:
+        200:
+          description: ok
+    put:
+      tags:
+        - tutor
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Tutor'
+      responses:
+        200:
+          description: ok
+  /tutors/educations:
+    put:
+      tags:
+        - tutor
+      parameters:
+        - in: body
+          name: education
+          schema:
+            $ref: '#/definitions/Education'
+      responses:
+        200:
+          description: ok
+    post:
+      tags:
+        - tutor
+      parameters:
+        - in: body
+          name: education
+          schema:
+            $ref: '#/definitions/Education'
+      responses:
+        200:
+          description: ok
+  /tutors/communicationchannels:
+    put:
+      tags:
+        - tutor
+      parameters:
+        - in: body
+          name: education
+          schema:
+            $ref: '#/definitions/Education'
+      responses:
+        200:
+          description: ok
+    post:
+      tags:
+        - tutor
+      parameters:
+        - in: body
+          name: education
+          schema:
+            $ref: '#/definitions/Education'
+      responses:
+        200:
+          description: ok
+  /tutors/additionaldetails:
+    put:
+      tags:
+        - tutor
+      parameters:
+        - in: body
+          name: additionalDetails
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        200:
+          description: ok
+  /appointments:
+    post:
+      tags:
+        - appointment
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/appointment'
+      responses:
+        200:
+          description: ok
+        405:
+          description: invalid input
+    get:
+      tags:
+        - appointment
+      parameters: []
+      responses:
+        200:
+          description: success
+        401:
+          description: unauthorized
+  /appointments/{appointmentId}/state:
+    put:
+      tags:
+        - appointment
+      parameters:
+        - in: path
+          name: appointmentId
+          type: string
+          format: uuid
+          required: true
+        - in: query
+          name: state
+          type: string
+      responses:
+        200:
+          description: ok
+        401:
+          description: unauthorized
+        403:
+          description: forbidden
+  /appointments/{appointmentId}/messages:
+    post:
+      tags:
+        - appointment
+      parameters:
+        - in: path
+          name: appointmentId
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: ok
+        401:
+          description: unauthorizef
+        403:
+          description: forbidden
+    get:
+      tags:
+        - appointment
+      parameters:
+        - in: path
+          name: appointmentId
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: ok
+        401:
+          description: unauthorize
+        403:
+          description: forbidden
+  /courses:
+    post:
+      tags:
+        - course
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/course'
+      responses:
+        405:
+          description: invalid input
+    put:
+      tags:
+        - course
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/course'
+      responses:
+        404:
+          description: not found
+        405:
+          description: invalid input
+    get:
+      tags:
+        - course
+      parameters: []
+      responses:
+        200:
+          description: success operation
+
+  /courses/{courseId}:
+    get:
+      tags:
+        - course
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: success
+        404:
+          description: not found
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: http://petstore.swagger.io/oauth/dialog
+    flow: implicit
+    scopes:
+      write:pets: modify pets in your account
+      read:pets: read your pets
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  availability:
+    type: object
+    properties:
+      isRecurring:
+        type: boolean
+      recurringHex:
+        type: string
+      nonRecurringHex:
+        type: string
+      nonRecurringStartDate:
+        type: string
+  course:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      title:
+        type: string
+      description:
+        type: string
+      subject:
+        type: string
+      schoolLevel:
+        type: string
+      price:
+        type: integer
+        format: int32
+      tutorId:
+        type: integer
+        format: int64
+  registerModel:
+    type: object
+    properties:
+      loginAccount:
+        $ref: '#/definitions/loginAccount'
+      user:
+        $ref: '#/definitions/user'
+  loginAccount:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      email:
+        type: string
+        format: email
+      password:
+        type: string
+      userId:
+        type: string
+        format: uuid
+  user:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      username:
+        type: string
+      name:
+        type: string
+      avatarUrl:
+        type: string
+        format: uri
+      zoomId:
+        type: string
+      skypeId:
+        type: string
+  appointment:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      courseId:
+        type: string
+        format: uuid
+      tutorId:
+        type: string
+        format: uuid
+      studentId:
+        type: string
+        format: uuid
+      startTime:
+        type: string
+        format: date-time
+      period:
+        type: number
+      status:
+        type: string
+  TutorRegistration:
+    type: object
+    properties:
+      teachingSubjects:
+        type: array
+        items:
+          type: string
+      teachingLevels:
+        type: array
+        items:
+          type: string
+      price:
+        type: number
+  Tutor:
+    type: object
+    properties:
+      teachingSubjects:
+        type: array
+        items:
+          type: string
+      teachingLevels:
+        type: array
+        items:
+          type: string
+      price:
+        type: number
+      educations:
+        type: array
+        items:
+          $ref: '#/definitions/Education'
+      commucationChannels:
+        type: array
+        items:
+          $ref: '#/definitions/CommucationChannel'
+      onsiteDistrictCode:
+        type: number
+      additionalDetails:
+        type: array
+        items:
+          type: string
+  Education:
+    type: object
+    properties:
+      level:
+        type: string
+      school:
+        type: string
+      gpa:
+        type: number
+  CommucationChannel:
+    type: object
+    properties:
+      channel:
+        type: string
+      id:
+        type: string
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /1hourtutor/Test/1.0.0
+schemes:
+  - https
+  - http

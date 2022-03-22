@@ -1,5 +1,7 @@
 const path = require("path");
 var express = require('express');
+
+
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
 // var session = require('express-session');
@@ -11,6 +13,7 @@ var jwtMiddleware = require('../middlewares/jwt.middleware')
 var indexRouter = require('../routes/index');
 var authenRouter = require('../routes/authen');
 var usersRouter = require('../routes/users');
+var tutorsRouter = require('../routes/tutors');
 var crudRouter = require('../routes/crud');
 var uploadRouter = require('../routes/upload');
 var verificationRouter = require('../routes/verification');
@@ -24,6 +27,11 @@ var omiseRouter = require('../routes/omise');
 
 
 var app = express();
+
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(cors({exposedHeaders:'accessTokenDev'}))
 app.options('*', cors({exposedHeaders:'accessTokenDev'}))
@@ -55,6 +63,7 @@ app.use(jwtMiddleware.extractUser);
 app.use('/', indexRouter);
 app.use('/api/authen', authenRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/tutors', tutorsRouter);
 //app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/verification', verificationRouter);
