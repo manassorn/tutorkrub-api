@@ -522,8 +522,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 # Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
-basePath: /1hourtutor/Test/1.0.0
+host: localhost:3000
+basePath: /api
 schemes:
-  - https
   - http

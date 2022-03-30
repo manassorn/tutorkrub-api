@@ -7,7 +7,7 @@ const tutorsDao = require('../dao/tutors.dao')
 
 router.post('/', async (req, res, next) => {
   const tutor = req.body
-  tutor.userId = req.user.id
+  tutor.userId = req.user?req.user.id:null
   await tutorsDao.create(tutor)
   api.ok(res)
 });
@@ -16,13 +16,6 @@ router.put('/', async (req, res, next) => {
   const tutor = req.body
   tutor.userId = req.user.id
   await tutorsDao.findByIdAndUpdate(tutor)
-  api.ok(res)
-});
-
-router.post('/', async (req, res, next) => {
-  const tutor = req.body
-  tutor.userId = req.user.id
-  await tutorDao.create(tutor)
   api.ok(res)
 });
 
