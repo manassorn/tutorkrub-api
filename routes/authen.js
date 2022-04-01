@@ -55,7 +55,7 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.get('/checkLogin', async (req, res, next) => {
-  api.responseOk(res, {loggedIn: req.user?true:false })
+  api.responseOk(res, {loginStatus: req.user?'authorized':'not_authorized', user: req.user })
 });
 
 router.post('/logout', async (req, res, next) => {
