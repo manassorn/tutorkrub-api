@@ -8,6 +8,8 @@ info:
 # host: petstore.swagger.io
 # basePath: /v2
 tags:
+  - name: authen
+    description: ...
   - name: loginAccount
     description: ...
   - name: user
@@ -23,6 +25,20 @@ tags:
 # schemes:
 # - http
 paths:
+  /authen/checkLogin
+    tags:
+      - authen
+    get:
+      responses:
+        200:
+          description: ok
+          schema:
+            type: object
+            properties:
+              loginStatus:
+                type: string
+              user:
+                $ref: '#/definitions/User'
   /register/:
     post:
       parameters:
