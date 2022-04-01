@@ -54,18 +54,8 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-router.get('/devlogin2/:userId', async (req, res, next) => {
-  //hNqOKzYwhJjZTIDLUkf5
-  console.log('asaaaaa')
-  const userId = req.params.userId
-  const token = generateJwtToken(res, userId)
-  res.set('accessTokenDev', token)
-  const user = crudController.readById('user', userId)
-  api.responseOk(res, user)
-});
-
-router.get('/session', async (req, res, next) => {
-  api.responseOk(res,req.session)
+router.get('/checkLogin', async (req, res, next) => {
+  api.responseOk(res, {loggedIn: req.user?true:false })
 });
 
 router.post('/logout', async (req, res, next) => {
