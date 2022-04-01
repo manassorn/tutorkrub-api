@@ -6,7 +6,8 @@ const tutorSchema = new Schema({
   teachingSubjects: [{ type: String }],
   teachingLevels: [{ type: String }],
   price: Number,
-  additionalDetails: [{ type: String }]
+  additionalDetails: [{ type: String }],
+  user: { type: Schema.Types.ObjectId, ref: 'User', localField: 'userId' },
 });
 
  

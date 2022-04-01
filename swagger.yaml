@@ -99,7 +99,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/user'
+            $ref: '#/definitions/User'
       responses:
         200:
           description: ok
@@ -408,7 +408,7 @@ definitions:
       loginAccount:
         $ref: '#/definitions/loginAccount'
       user:
-        $ref: '#/definitions/user'
+        $ref: '#/definitions/User'
   loginAccount:
     type: object
     properties:
@@ -423,7 +423,7 @@ definitions:
       userId:
         type: string
         format: uuid
-  user:
+  User:
     type: object
     properties:
       id:
@@ -440,6 +440,19 @@ definitions:
         type: string
       skypeId:
         type: string
+      publicProfile:
+        $ref: '#/definitions/PublicProfile'
+  PublicProfile:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+      avatarUrl:
+        type: string
+        format: uri
   appointment:
     type: object
     properties:
