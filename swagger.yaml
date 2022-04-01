@@ -18,6 +18,8 @@ tags:
     description: ...
   - name: course
     description: ...
+  - name: search
+    description: ...
 # schemes:
 # - http
 paths:
@@ -343,7 +345,6 @@ paths:
       responses:
         200:
           description: success operation
-
   /courses/{courseId}:
     get:
       tags:
@@ -358,6 +359,24 @@ paths:
           description: success
         404:
           description: not found
+  /search:
+    get:
+      tags:
+        - search
+      parameters:
+        - name: subject
+          in: query
+          type: string
+        - name: level
+          in: query
+          type: string
+      responses:
+        200:
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Search'
 securityDefinitions:
   petstore_auth:
     type: oauth2
@@ -531,11 +550,48 @@ definitions:
         type: string
       id:
         type: string
+  Search:
+    type: object
+    properties:
+      name:
+        type: string
+      avatarUrl:
+        type: string
+      teachingSubjects:
+        type: array
+        items:
+          type: string
+      teachingLevels:
+        type: array
+        items:
+          type: string
+      price:
+        type: number
+      educations:
+        type: array
+        items:
+          $ref: '#/definitions/Education'
+      commucationChannels:
+        type: array
+        items:
+          $ref: '#/definitions/CommucationChannel'
+      onsiteDistrictCode:
+        type: number
+      additionalDetails:
+        type: array
+        items:
+          type: string
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 # Added by API Auto Mocking Plugin
-host: localhost:3000
-basePath: /api
+# host: localhost:3000
+# basePath: /api
+# schemes:
+#   - http
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /1hourtutor/Test/1.0.0
 schemes:
+  - https
   - http
