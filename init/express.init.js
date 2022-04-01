@@ -62,7 +62,7 @@ app.use(jwtMiddleware.extractUser);
 app.use('/', indexRouter);
 app.use('/api/authen', authenRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/tutors', tutorsRouter);
+app.use('/api/tutors', jwtMiddleware.checkLogin, tutorsRouter);
 //app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/verification', verificationRouter);
