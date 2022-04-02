@@ -26,9 +26,9 @@ tags:
 # - http
 paths:
   /authen/checkLogin
-    tags:
-      - authen
     get:
+      tags:
+        - authen
       responses:
         200:
           description: ok
