@@ -25,7 +25,7 @@ tags:
 # schemes:
 # - http
 paths:
-  /authen/checkLogin
+  /authen/checkLogin:
     get:
       tags:
         - authen
