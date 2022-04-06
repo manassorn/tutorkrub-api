@@ -21,6 +21,7 @@ var coursesRouter = require('../routes/courses');
 var appointmentsRouter = require('../routes/appointments');
 var registerRouter = require('../routes/register');
 var omiseRouter = require('../routes/omise');
+var searchRouter = require('../routes/search');
 
 
 
@@ -72,6 +73,7 @@ app.use('/api/courses', jwtMiddleware.checkLogin, coursesRouter);
 app.use('/api/appointments', jwtMiddleware.checkLogin, appointmentsRouter);
 app.use('/api/register', registerRouter);
 app.use('/api/omise', omiseRouter);
+app.use('/api/search', searchRouter);
 
 app.get('*', function(req,res) {
   res.sendFile(path.resolve(path.join(__dirname, '../public', 'index.html')))
