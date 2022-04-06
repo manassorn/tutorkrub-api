@@ -12,6 +12,11 @@ class TutorsDao extends BaseDao {
   }
 
   async search(subject, level) {
+    if(!subject && !level) {
+      return await this.Model.find()
+        .populate('user').exec()
+
+    }
     return await this.Model.find({ teachingSubjects: subject, teachingLevels: level})
       .populate('user').exec()
   }
