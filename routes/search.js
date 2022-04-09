@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
     t.name = t.user.name;
     t.avatarUrl = t.user.avatarUrl;
     delete t.user;
-    return 'a';
+    return t;
   })
   api.ok(res, searches)
 });
