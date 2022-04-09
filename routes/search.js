@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
       teachingLevels: t.teachingLevels,
       price: t.price,
       name: t.user.name,
-      avatarUrl: t.avatarUrl
+      avatarUrl: t.user.avatarUrl
     }
   })
   api.ok(res, searches)
