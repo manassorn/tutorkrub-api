@@ -10,10 +10,13 @@ router.get('/', async (req, res, next) => {
   const level = req.params.level
   const tutors = await tutorsDao.search(subject, level)
   const searches = tutors.map((t) => {
-    t.name = t.user.name;
-    t.avatarUrl = t.user.avatarUrl;
-    delete t.user;
-    return t;
+    return {
+      teachingSubjects: t.teachingSubjects,
+      teachingLevels: t.teachingLevels,
+      price: t.price,
+      name: t.user.name,
+      avatarUrl: t.avatarUrl
+    }
   })
   api.ok(res, searches)
 });
