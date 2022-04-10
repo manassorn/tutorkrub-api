@@ -27,12 +27,12 @@ tags:
 # schemes:
 # - http
 paths:
-  /favorite/:tutorId
+  /favorites/{tutorId}:
     put:
       tags:
         - favorite
       parameters:
-        - in: query
+        - in: path
           name: tutorId
           type: string
       responses:
@@ -42,7 +42,7 @@ paths:
       tags:
         - fovorite
       parameters:
-        - in: query
+        - in: path
           name: tutorId
           type: string
       responses:
