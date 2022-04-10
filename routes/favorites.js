@@ -6,12 +6,12 @@ const favoriteDao = require('../dao/favorite.dao')
 
 
 router.put('/tutor/:tutorId', async (req, res, next) => {
-  await tutorsDao.add(req.user.id, req.query.tutorId)
+  await favoriteDao.add(req.user.id, req.params.tutorId)
   api.ok(res)
 });
 
 router.delete('/tutor/:tutorId', async (req, res, next) => {
-  await tutorsDao.remove(req.user.id, req.query.tutorId)
+  await favoriteDao.remove(req.user.id, req.params.tutorId)
   api.ok(res)
 });
 

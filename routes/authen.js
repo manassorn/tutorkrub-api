@@ -47,8 +47,12 @@ router.post('/login', async (req, res, next) => {
   const user = await authenController.login(req.body.email, req.body.password)
   
   if (user) {
-    generateJwtToken(res, user.id)
-    api.responseOk(res, user)
+    const accessToken = generateJwtToken(res, user.id)
+    if(process.env.ENV == 'dev') {
+      api.responseOk(res, {accessToken, user})
+    } else {
+      api.responseOk(res, {user})
+    }
   } else {
     api.responseUnauthorized(res)
   }

@@ -2,24 +2,26 @@ var jwt = require('jsonwebtoken')
 var api = require('../routes/api')
 module.exports.extractUser = (req, res, next) => {
   
-  
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-        const token = authHeader.split(' ')[1];
-        jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-            if (!err) {
-              req.user = user;
-            }
+
+    if(process.env.ENV == 'dev') {
+      const accessToken = req.headers.accesstoken;
+      if (accessToken) {
+        jwt.verify(accessToken, process.env.TOKEN_SECRET, (err, user) => {
+          if (!err) {
+            req.user = user;
+          }
         });
-    }
-    const accessTokenDev = req.cookies['accesstoken']
-    if(accessTokenDev) {
-      jwt.verify(accessTokenDev, process.env.TOKEN_SECRET, (err, user) => {
-        if (!err) {
-          req.user = user;
-          req.user.id = user.userId
-        }
-      });
+      }
+    } else {
+      const accessToken = req.cookies['accesstoken']
+      if(accessToken) {
+        jwt.verify(accessToken, process.env.TOKEN_SECRET, (err, user) => {
+          if (!err) {
+            req.user = user;
+            req.user.id = user.userId
+          }
+        });
+      }
     }
     next()
 };

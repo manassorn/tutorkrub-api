@@ -31,6 +31,8 @@ paths:
     put:
       tags:
         - favorite
+      security:
+        - api_key: [ ]
       parameters:
         - in: path
           name: tutorId
@@ -40,7 +42,9 @@ paths:
           description: ok
     delete:
       tags:
-        - fovorite
+        - favorite
+      security:
+        - api_key: [ ]
       parameters:
         - in: path
           name: tutorId
@@ -52,6 +56,8 @@ paths:
     get:
       tags:
         - authen
+      security:
+        - api_key: [ ]
       responses:
         200:
           description: ok
@@ -86,15 +92,17 @@ paths:
         200:
           description: ok
 
-  /login:
+  /authen/login:
     post:
+      tags:
+        - authen
       parameters:
         - in: body
           name: body
           schema:
             type: object
             properties:
-              username:
+              email:
                 type: string
               password:
                 type: string
@@ -426,7 +434,7 @@ securityDefinitions:
       read:pets: read your pets
   api_key:
     type: apiKey
-    name: api_key
+    name: accesstoken
     in: header
 definitions:
   availability:
@@ -624,7 +632,8 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 # Added by API Auto Mocking Plugin
-host: 139.59.216.150:8080
+# host: 139.59.216.150:8080
+host: localhost:3000
 basePath: /api
 schemes:
   - http
