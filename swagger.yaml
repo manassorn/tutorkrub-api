@@ -22,9 +22,32 @@ tags:
     description: ...
   - name: search
     description: ...
+  - name: favorite
+    description: ...
 # schemes:
 # - http
 paths:
+  /favorite/:tutorId
+    put:
+      tags:
+        - favorite
+      parameters:
+        - in: query
+          name: tutorId
+          type: string
+      responses:
+        200:
+          description: ok
+    delete:
+      tags:
+        - fovorite
+      parameters:
+        - in: query
+          name: tutorId
+          type: string
+      responses:
+        200:
+          description: ok
   /authen/checkLogin:
     get:
       tags:
