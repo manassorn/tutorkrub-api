@@ -27,7 +27,7 @@ tags:
 # schemes:
 # - http
 paths:
-  /favorites/{tutorId}:
+  /favorites/tutor/{tutorId}:
     put:
       tags:
         - favorite
