@@ -601,7 +601,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 # Added by API Auto Mocking Plugin
-host: localhost:3000
+host: 139.59.216.150:8080
 basePath: /api
 schemes:
   - http
