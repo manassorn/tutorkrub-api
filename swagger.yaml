@@ -9,21 +9,21 @@ info:
 # basePath: /v2
 tags:
   - name: authen
-    description: ...
+    description:
   - name: register
-    description: ...
+    description:
   - name: loginAccount
-    description: ...
+    description:
   - name: user
-    description: ...
+    description:
   - name: tutor
-    description: ...
+    description:
   - name: appointment
-    description: ...
-  - name: search
-    description: ...
+    description:
   - name: favorite
-    description: ...
+    description:
+  - name: search
+    description:
 # schemes:
 # - http
 paths:
