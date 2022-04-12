@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  description: TutorKrub API
+  description: TutorKrub API eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTYwNGNhOGI1M2E2OGUzY2FiMmY3MGQiLCJpYXQiOjE2NDk3MjcwMDIsImV4cCI6MTY1MDMzMTgwMn0.KIEC4HoCVpS_1DyVVresBdRHK5n5YmD44Tj1HetPgv4
   version: 1.0.0
   title: TutorKrub API
   contact:
@@ -10,6 +10,8 @@ info:
 tags:
   - name: authen
     description: ...
+  - name: register
+    description: ...
   - name: loginAccount
     description: ...
   - name: user
@@ -17,8 +19,6 @@ tags:
   - name: tutor
     description: ...
   - name: appointment
-    description: ...
-  - name: course
     description: ...
   - name: search
     description: ...
@@ -70,6 +70,8 @@ paths:
                 $ref: '#/definitions/User'
   /register/:
     post:
+      tags:
+        - register
       parameters:
         - in: body
           name: body
@@ -80,6 +82,8 @@ paths:
           description: ok
   /register/fb:
     post:
+      tags:
+        - register
       parameters:
         - in: body
           name: body
@@ -106,11 +110,16 @@ paths:
                 type: string
               password:
                 type: string
+            example:
+              email: gg@g.com
+              password: gg
       responses:
         200:
           description: ok
-  /logout:
+  /authen/logout:
     get:
+      tags:
+        - authen
       parameters: []
       responses:
         200:
@@ -119,6 +128,8 @@ paths:
     put:
       tags:
         - loginAccount
+      security:
+        - api_key: [ ]
       parameters:
         - in: path
           name: accountId
@@ -131,6 +142,8 @@ paths:
     put:
       tags:
         - loginAccount
+      security:
+        - api_key: [ ]
       parameters:
         - in: path
           name: accountId
@@ -144,6 +157,8 @@ paths:
     put:
       tags:
         - user
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: body
@@ -157,6 +172,8 @@ paths:
     get:
       tags:
         - user
+      security:
+        - api_key: [ ]
       parameters: []
       responses:
         200:
@@ -167,6 +184,8 @@ paths:
     post:
       tags:
         - user
+      security:
+        - api_key: [ ]
       consumes:
         - multipart/form-data
       parameters:
@@ -180,6 +199,8 @@ paths:
     put:
       tags:
         - user
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: body
@@ -191,6 +212,8 @@ paths:
     get:
       tags:
         - user
+      security:
+        - api_key: [ ]
       parameters: []
       responses:
         200:
@@ -201,6 +224,8 @@ paths:
     post:
       tags:
         - tutor
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: body
@@ -212,6 +237,8 @@ paths:
     put:
       tags:
         - tutor
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: body
@@ -224,6 +251,8 @@ paths:
     put:
       tags:
         - tutor
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: education
@@ -235,6 +264,8 @@ paths:
     post:
       tags:
         - tutor
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: education
@@ -247,6 +278,8 @@ paths:
     put:
       tags:
         - tutor
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: education
@@ -258,6 +291,8 @@ paths:
     post:
       tags:
         - tutor
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: education
@@ -270,6 +305,8 @@ paths:
     put:
       tags:
         - tutor
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: additionalDetails
@@ -284,6 +321,8 @@ paths:
     post:
       tags:
         - appointment
+      security:
+        - api_key: [ ]
       parameters:
         - in: body
           name: body
@@ -297,6 +336,8 @@ paths:
     get:
       tags:
         - appointment
+      security:
+        - api_key: [ ]
       parameters: []
       responses:
         200:
@@ -307,6 +348,8 @@ paths:
     put:
       tags:
         - appointment
+      security:
+        - api_key: [ ]
       parameters:
         - in: path
           name: appointmentId
@@ -327,6 +370,8 @@ paths:
     post:
       tags:
         - appointment
+      security:
+        - api_key: [ ]
       parameters:
         - in: path
           name: appointmentId
@@ -343,6 +388,8 @@ paths:
     get:
       tags:
         - appointment
+      security:
+        - api_key: [ ]
       parameters:
         - in: path
           name: appointmentId
@@ -356,56 +403,6 @@ paths:
           description: unauthorize
         403:
           description: forbidden
-  /courses:
-    post:
-      tags:
-        - course
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/course'
-      responses:
-        405:
-          description: invalid input
-    put:
-      tags:
-        - course
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/course'
-      responses:
-        404:
-          description: not found
-        405:
-          description: invalid input
-    get:
-      tags:
-        - course
-      parameters: []
-      responses:
-        200:
-          description: success operation
-  /courses/{courseId}:
-    get:
-      tags:
-        - course
-      parameters:
-        - name: courseId
-          in: path
-          required: true
-          type: string
-      responses:
-        200:
-          description: success
-        404:
-          description: not found
   /search:
     get:
       tags:
@@ -425,13 +422,6 @@ paths:
             items:
               $ref: '#/definitions/Search'
 securityDefinitions:
-  petstore_auth:
-    type: oauth2
-    authorizationUrl: http://petstore.swagger.io/oauth/dialog
-    flow: implicit
-    scopes:
-      write:pets: modify pets in your account
-      read:pets: read your pets
   api_key:
     type: apiKey
     name: accesstoken
