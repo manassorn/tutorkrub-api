@@ -16,7 +16,7 @@ router.delete('/tutor/:tutorId', async (req, res, next) => {
 });
 
 router.get('/', async (req, res, next) => {
-  const fav = favoriteDao.find({user: req.user.id})
+  const fav = favoriteDao.get(req.user.id)
   api.ok(res, fav)
 })
 

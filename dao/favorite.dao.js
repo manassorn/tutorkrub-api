@@ -8,11 +8,10 @@ class FavoriteDao extends BaseDao {
   }
 
   async add(userId, tutorId) {
-    return await Favorite.findOneAndUpdate({ user: userId }, {user: userId, $addToSet: { tutors: tutorId } }, {upsert: true});
+    return await Favorite.findByIdAndUpdate(userId, {user: userId, $addToSet: { tutors: tutorId } }, {upsert: true});
   }
-
   async remove(userId, tutorId) {
-    return await Favorite.findOneAndUpdate({ user: userId }, { $pull: { tutors: tutorId } });
+    return await Favorite.findByIdAndUpdate(userId, { $pull: { tutors: tutorId } });
 
   }
 }
