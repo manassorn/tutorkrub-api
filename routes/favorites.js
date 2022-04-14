@@ -15,4 +15,10 @@ router.delete('/tutor/:tutorId', async (req, res, next) => {
   api.ok(res)
 });
 
+router.get('/', async (req, res, next) => {
+  const fav = favoriteDao.find({user: req.user.id})
+  api.ok(res, fav)
+})
+
+
 module.exports = router;

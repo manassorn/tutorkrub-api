@@ -12,6 +12,9 @@ class BaseDao {
   async get(id) {
     return await this.Model.findById(id).exec()
   }
+  async find(condition) {
+    return await this.Model.find(condition).exec()
+  }
 }
 
 module.exports = BaseDao
