@@ -632,7 +632,7 @@ externalDocs:
   url: http://swagger.io
 # Added by API Auto Mocking Plugin
 # host: 139.59.216.150:8080
-host: localhost:3000
+# host: localhost:3000
 basePath: /api
 schemes:
   - http
