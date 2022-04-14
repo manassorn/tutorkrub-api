@@ -13,7 +13,8 @@ module.exports.extractUser = (req, res, next) => {
           }
         });
       }
-    } else {
+    } 
+    if (!req.user) {
       const accessToken = req.cookies['accesstoken']
       if(accessToken) {
         jwt.verify(accessToken, process.env.TOKEN_SECRET, (err, user) => {
