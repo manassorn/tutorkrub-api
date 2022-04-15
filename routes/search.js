@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
   const tutors = await tutorsDao.search(subject, level)
   const searches = tutors.map((t) => {
     return {
+      id: t._id,
       teachingSubjects: t.teachingSubjects,
       teachingLevels: t.teachingLevels,
       price: t.price,
