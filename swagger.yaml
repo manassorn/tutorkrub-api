@@ -36,7 +36,7 @@ paths:
       responses: 
         200:
           description: success
-  /favorites/tutor/{tutorId}:
+  /favorites/tutors/{tutorId}:
     put:
       tags:
         - favorite
@@ -89,6 +89,10 @@ paths:
       responses:
         200:
           description: ok
+        400:
+          description: ok
+          schema:
+            $ref: '#/definitions/ErrorResponse'
   /register/fb:
     post:
       tags:
@@ -627,6 +631,16 @@ definitions:
         type: array
         items:
           type: string
+  ErrorResponse:
+    type: object
+    properties:
+      error:
+        type: object
+        properties:
+          message:
+            type: string
+          code:
+            type: number
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io

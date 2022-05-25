@@ -6,14 +6,19 @@ const loginAccountDao = require('../dao/LoginAccountDao')
 const userDao = require('../dao/users.dao')
 
 router.post('/', async (req, res, next) => {
+  const loginAccount = req.body.loginAccount
+  const existingEmail = await loginAccountDao.getByEmail(loginAccount.email)
+  if (existingEmail) {
+    api.responseError(res, "The email address already exists")
+    return
+  }
   if (req.body.user) {
     const user = await userDao.create(req.body.user)
-    const loginAccount = req.body.loginAccount
+
     loginAccount.user = user.id
 
     await loginAccountDao.create(loginAccount)
   } else {
-    const loginAccount = req.body.loginAccount
     await loginAccountDao.create(loginAccount)
   }
 
