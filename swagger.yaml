@@ -100,7 +100,7 @@ paths:
         - register
       parameters:
         - in: body
-          name:
+          name: body
             schema:
               type: object
               properties:
