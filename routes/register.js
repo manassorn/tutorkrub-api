@@ -26,5 +26,15 @@ router.post('/', async (req, res, next) => {
 
 });
 
+router.post('/checkemail', async (req, res, next) => {
+  const email = req.body
+  const existingEmail = await loginAccountDao.getByEmail(email)
+  if (existingEmail) {
+    api.responseError(res, "The email address already exists")
+  } else {
+    api.ok(res)
+  }
+});
+
 
 module.exports = router
