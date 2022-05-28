@@ -93,6 +93,18 @@ paths:
           description: ok
           schema:
             $ref: '#/definitions/ErrorResponse'
+
+  /register/checkemail:
+    post:
+      tags:
+        - register
+      parameters:
+        - in: body
+          name:
+          type: string
+      responses:
+        200:
+          description: ok
   /register/fb:
     post:
       tags:
