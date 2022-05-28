@@ -101,7 +101,11 @@ paths:
       parameters:
         - in: body
           name:
-          type: string
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
       responses:
         200:
           description: ok

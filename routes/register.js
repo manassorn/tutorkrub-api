@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
 });
 
 router.post('/checkemail', async (req, res, next) => {
-  const email = req.body
+  const email = req.body.email
   const existingEmail = await loginAccountDao.getByEmail(email)
   if (existingEmail) {
     api.ok(res, {exists: true})
