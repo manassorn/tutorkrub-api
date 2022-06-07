@@ -4,15 +4,17 @@ var router = express.Router();
 var api = require('./api')
 const loginAccountDao = require('../dao/LoginAccountDao')
 const userDao = require('../dao/users.dao')
+const {ERROR_KRUBID_ALREADY_EXISTS} = require('../errors')
 
 router.post('/', async (req, res, next) => {
   const loginAccount = req.body.loginAccount
   const existingEmail = await loginAccountDao.getByEmail(loginAccount.email)
-  if (existingEmail) {
-    api.responseError(res, "The email address already exists")
-    return
-  }
   if (req.body.user) {
+    const existingUser = await userDao.getByKrubId(req.body.user.krubId)
+    if (existingEmail || existingUser) {
+      api.responseCustomError(res, ERROR_KRUBID_ALREADY_EXISTS)
+      return
+    }
     const user = await userDao.create(req.body.user)
 
     loginAccount.user = user.id

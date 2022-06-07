@@ -12,6 +12,11 @@ class UsersDao extends BaseDao {
     user.avatarUrl = avatarUrl
     user.save()
   }
+
+  async getByKrubId(krubId) {
+    const user = await this.findOne({krubId})
+    return user
+  }
 }
 
 const usersDao = new UsersDao()

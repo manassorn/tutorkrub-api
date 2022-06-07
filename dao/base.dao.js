@@ -15,6 +15,9 @@ class BaseDao {
   async find(condition) {
     return await this.Model.find(condition).exec()
   }
+  async findOne(condition) {
+    return await this.Model.findOne(condition).exec()
+  }
 }
 
 module.exports = BaseDao

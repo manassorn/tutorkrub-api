@@ -13,11 +13,19 @@ module.exports.ok = (res, data) => {
   })
 }
 module.exports.responseError = (res, message) => {
-    res.status(400).json({
-        error: {
-            message: message
-        }
-    })
+  res.status(400).json({
+    error: {
+      message: message
+    }
+  })
+}
+module.exports.responseCustomError = (res, error) => {
+  res.status(400).json({
+    error: {
+      code: error.code,
+      message: error.message
+    }
+  })
 }
 module.exports.responseErrorCode = (res, code, message) => {
   res.status(code).json({
