@@ -2,7 +2,7 @@ const BaseDao = require('./base.dao')
 
 const User = require('./mongoose/models/User')
 
-class UsersDao extends BaseDao {
+class UserDao extends BaseDao {
   constructor() {
     super(User)
   }
@@ -19,5 +19,5 @@ class UsersDao extends BaseDao {
   }
 }
 
-const usersDao = new UsersDao()
+const usersDao = new UserDao()
 module.exports = usersDao

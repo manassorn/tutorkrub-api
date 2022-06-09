@@ -1,5 +1,5 @@
 const DaoController = require('./dao.controller')
-const usersDao = require('../dao/users.dao')
+const usersDao = require('../dao/user.dao')
 
 class UsersController extends DaoController {
   constructor() {

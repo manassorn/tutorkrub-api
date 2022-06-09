@@ -2,20 +2,20 @@ var express = require('express');
 var router = express.Router();
 
 var api = require('./api')
-const tutorsDao = require('../dao/tutors.dao')
+const tutorDao = require('../dao/tutor.dao')
 
 
 router.post('/', async (req, res, next) => {
   const tutor = req.body
   tutor.user = req.user.id
-  await tutorsDao.create(tutor)
+  await tutorDao.create(tutor)
   api.ok(res)
 });
 
 router.put('/', async (req, res, next) => {
   const tutor = req.body
   tutor.userId = req.user.id
-  await tutorsDao.findByIdAndUpdate(tutor)
+  await tutorDao.findByIdAndUpdate(tutor)
   api.ok(res)
 });
 
