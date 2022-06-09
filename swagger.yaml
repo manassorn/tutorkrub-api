@@ -93,6 +93,22 @@ paths:
           description: ok
           schema:
             $ref: '#/definitions/ErrorResponse'
+  /register/tutor:
+    post:
+      tags:
+        - register
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/registerTutorModel'
+      responses:
+        200:
+          description: ok
+        400:
+          description: ok
+          schema:
+            $ref: '#/definitions/ErrorResponse'
 
   /register/checkemail:
     post:
@@ -105,6 +121,22 @@ paths:
             type: object
             properties:
               email:
+                type: string
+      responses:
+        200:
+          description: ok
+
+  /register/checkkrubid:
+    post:
+      tags:
+        - register
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              krubId:
                 type: string
       responses:
         200:
@@ -494,6 +526,15 @@ definitions:
         $ref: '#/definitions/loginAccount'
       user:
         $ref: '#/definitions/User'
+  registerTutorModel:
+    type: object
+    properties:
+      loginAccount:
+        $ref: '#/definitions/loginAccount'
+      user:
+        $ref: '#/definitions/User'
+      tutor:
+        $ref: '#/definitions/Tutor'
   loginAccount:
     type: object
     properties:
