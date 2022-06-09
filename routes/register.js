@@ -5,7 +5,7 @@ var api = require('./api')
 const loginAccountDao = require('../dao/LoginAccountDao')
 const userDao = require('../dao/user.dao')
 const tutorDao = require('../dao/tutor.dao')
-const {ERROR_KRUBID_ALREADY_EXISTS} = require('../errors')
+const {ERROR_EMAIL_ALREADY_EXISTS, ERROR_KRUBID_ALREADY_EXISTS} = require('../errors')
 
 router.post('/', async (req, res, next) => {
   const loginAccount = req.body.loginAccount
@@ -28,11 +28,11 @@ router.post('/tutor', async (req, res, next) => {
   const existingEmail = await loginAccountDao.getByEmail(req.body.email)
   const existingUser = await userDao.getByKrubId(req.body.krubId)
   if  (existingEmail) {
-    api.responseCustomError(ERROR_KRUBID_ALREADY_EXISTS)
+    api.responseCustomError(res,ERROR_EMAIL_ALREADY_EXISTS)
     return
   }
   if (existingUser) {
-    api.responseCustomError(ERROR_KRUBID_ALREADY_EXISTS)
+    api.responseCustomError(res,ERROR_KRUBID_ALREADY_EXISTS)
     return
   }
 
