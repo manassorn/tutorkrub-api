@@ -529,12 +529,22 @@ definitions:
   registerTutorModel:
     type: object
     properties:
-      loginAccount:
-        $ref: '#/definitions/loginAccount'
-      user:
-        $ref: '#/definitions/User'
-      tutor:
-        $ref: '#/definitions/Tutor'
+      email:
+        type: string
+      password:
+        type: string
+      krubId:
+        type: string
+      tutorSubjects:
+        type: array
+        items:
+          type: string
+      tutorLevels:
+        type: array
+        items:
+          type: string
+      tutorPrice:
+        type: number
   loginAccount:
     type: object
     properties:

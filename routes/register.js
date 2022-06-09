@@ -25,15 +25,31 @@ router.post('/', async (req, res, next) => {
 });
 
 router.post('/tutor', async (req, res, next) => {
-  const user = await userDao.create(req.body.user)
+  const existingEmail = await loginAccountDao.getByEmail(req.body.email)
+  const existingUser = await userDao.getByKrubId(req.body.krubId)
+  if  (existingEmail) {
+    api.responseCustomError(ERROR_KRUBID_ALREADY_EXISTS)
+    return
+  }
+  if (existingUser) {
+    api.responseCustomError(ERROR_KRUBID_ALREADY_EXISTS)
+    return
+  }
 
-  const tutor = req.body.tutor
-  tutor.user = user.id
-  await tutorDao.create(req.body.tutor)
+  const user = await userDao.create({krubId: req.body.krubId})
 
-  const loginAccount = req.body.loginAccount
-  loginAccount.user = user.id
-  await loginAccountDao.create(loginAccount)
+  await tutorDao.create({
+    tutorSubjects: req.body.tutorSubjects,
+    tutorLevels: req.body.tutorLevels,
+    tutorPrice: req.body.tutorPrice,
+    user: user.id
+  })
+
+  await loginAccountDao.create({
+    email: req.body.email,
+    password: req.body.password,
+    user: user.id
+  })
 
   api.ok(res)
 

@@ -4,7 +4,6 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
   //_id: Schema.Types.ObjectId,
   krubId: String,
-  username: String,
   name: {type: String/*, required: true*/},
   avatarUrl: String,
   skypeId: String,
