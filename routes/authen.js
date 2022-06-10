@@ -4,7 +4,6 @@ var express = require('express');
 var router = express.Router();
 
 var api = require('./api')
-var crudController = require('../controllers/crud.controller')
 var authenController = require('../controllers/authen.controller')
 
 
@@ -14,23 +13,23 @@ router.post('/fb', async (req, res, next) => {
       const { data } = response;
       if (data.error) return api.responseUnauthorized(res, data.error.message);
       
-      let account = crudController.readByUniqueField('loginAccounts', 'fbId', data.id)
-      let user = undefined
-      if(!account) {
-        user = {
-          name: data.name
-        }
-        const userRef = await crudController.create('users', user)
-        user.id = userRef.id
-        account = {
-          fbId: data.id,
-          userId: userRef.id
-        }
-        crudController.create('loginAccounts', account)
-
-      } else {
-        user = await crudController.readById('users', account.userId)
-      }
+      // let account = crudController.readByUniqueField('loginAccounts', 'fbId', data.id)
+      // let user = undefined
+      // if(!account) {
+      //   user = {
+      //     name: data.name
+      //   }
+      //   const userRef = await crudController.create('users', user)
+      //   user.id = userRef.id
+      //   account = {
+      //     fbId: data.id,
+      //     userId: userRef.id
+      //   }
+      //   crudController.create('loginAccounts', account)
+      //
+      // } else {
+      //   user = await crudController.readById('users', account.userId)
+      // }
       
       generateJwtToken(res, user.id)
       return api.responseOk(res, user)

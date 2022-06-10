@@ -15,7 +15,6 @@ var authenRouter = require('../routes/authen');
 var usersRouter = require('../routes/users');
 var tutorsRouter = require('../routes/tutors');
 var uploadRouter = require('../routes/upload');
-var verificationRouter = require('../routes/verification');
 var payRouter = require('../routes/pay');
 var coursesRouter = require('../routes/courses');
 var appointmentsRouter = require('../routes/appointments');
@@ -67,7 +66,6 @@ app.use('/api/users', usersRouter);
 app.use('/api/tutors', jwtMiddleware.checkLogin, tutorsRouter);
 //app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
-app.use('/api/verification', verificationRouter);
 app.use('/api/pay', payRouter);
 
 app.use('/api/courses', jwtMiddleware.checkLogin, coursesRouter);

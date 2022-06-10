@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 var api = require('./api')
-var verificationController = require('../controllers/verification.controller')
-var crudController = require('../controllers/crud.controller')
 var usersController = require('../controllers/users.controller')
 
 var s3 = require('../services/s3.service')
@@ -42,13 +40,13 @@ router.get('/me', async (req, res, next) => {
 router.post('/me/availability', async (req, res, next) => {
  
    const availability = req.body.availability
-   await crudController.update('Users', req.user.id, { availability })
+   // await crudController.update('Users', req.user.id, { availability })
    api.responseOk(res)
 });
 
 router.get('/me/availability', async (req, res, next) => {
 
-  const user = await crudController.readById('Users', req.user.id)
+  // const user = await crudController.readById('Users', req.user.id)
   api.responseOk(res, user.availability)
 });
 

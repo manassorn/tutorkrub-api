@@ -1,6 +1,5 @@
 const axios = require('axios')
 const crypto = require('crypto');
-const firestoreService = require('./firestore.service')
 
 
 module.exports.pay = async (customerId, orderNo, amount ,ipAddress = '127.0.0.1') => {
@@ -47,13 +46,4 @@ module.exports.pay = async (customerId, orderNo, amount ,ipAddress = '127.0.0.1'
 
 function md5(data) {
   return crypto.createHash('md5').update(data).digest("hex");
-}
-
-async function getOrderNo(userId) {
-  const user = await firestoreService.readById('user', userId);
-  const nextOrderNo = (!user.orderNo) ? 1 : user.orderNo + 1;
-  await firestoreService.update('user', userId, {
-    orderNo: nextOrderNo
-  })
-  return userId + '-' + nextOrderNo;
 }
