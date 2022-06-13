@@ -12,10 +12,10 @@ router.get('/', async (req, res, next) => {
   const searches = tutors.map((t) => {
     return {
       id: t._id,
-      teachingSubjects: t.teachingSubjects,
-      teachingLevels: t.teachingLevels,
-      price: t.price,
-      name: t.user.name,
+      tutorSubjects: t.tutorSubjects,
+      tutorLevels: t.tutorLevels,
+      tutorPrice: t.tutorPrice,
+      krubId: t.user.krubId,
       avatarUrl: t.user.avatarUrl
     }
   })
