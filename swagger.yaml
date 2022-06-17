@@ -469,6 +469,9 @@ paths:
       tags:
         - search
       parameters:
+        - name: tutorid
+          in: query
+          type: string
         - name: subject
           in: query
           type: string
