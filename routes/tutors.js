@@ -18,8 +18,9 @@ router.put('/', async (req, res, next) => {
   api.ok(res)
 });
 
-router.post('/availability', async (req, res) => {
-  const availability = req.body
+router.get('/', async (req, res) => {
+  const tutor = await tutorDao.getByUserId(req.user.id)
+  api.ok(res, tutor)
 })
 
 module.exports = router;

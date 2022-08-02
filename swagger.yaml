@@ -257,6 +257,17 @@ paths:
         200:
           description: ok
   /tutors:
+    get:
+      tags:
+        - tutor
+      security:
+        - api_key: [ ]
+      parameters: [ ]
+      responses:
+        200:
+          description: success
+        401:
+          description: unauthorized
     post:
       tags:
         - tutor

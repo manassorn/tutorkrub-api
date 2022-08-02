@@ -20,6 +20,10 @@ class TutorDao extends BaseDao {
     return await this.Model.find({ teachingSubjects: subject, teachingLevels: level})
       .populate('user').exec()
   }
+
+  async getByUserId(userId) {
+    return await this.Model.findOne({userId})
+  }
 }
 
 const tutorsDao = new TutorDao()
