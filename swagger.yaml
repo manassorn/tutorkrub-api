@@ -256,31 +256,6 @@ paths:
       responses:
         200:
           description: ok
-  /users/me/availability:
-    put:
-      tags:
-        - user
-      security:
-        - api_key: [ ]
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/availability'
-      responses:
-        200:
-          description: ok
-    get:
-      tags:
-        - user
-      security:
-        - api_key: [ ]
-      parameters: []
-      responses:
-        200:
-          description: ok
-        401:
-          description: unauthorized
   /tutors:
     post:
       tags:

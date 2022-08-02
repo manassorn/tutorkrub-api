@@ -14,7 +14,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   const tutor = req.body
-  await tutorDao.findByIdAndUpdate(req.user.id, tutor)
+  await tutorDao.findByUserIdAndUpdate(req.user.id, tutor)
   api.ok(res)
 });
 
