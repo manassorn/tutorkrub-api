@@ -18,6 +18,8 @@ tags:
     description:
   - name: tutor
     description:
+  - name: course
+    description:
   - name: appointment
     description:
   - name: favorite
@@ -364,6 +366,33 @@ paths:
       responses:
         200:
           description: ok
+  /courses:
+    get:
+      tags:
+        - course
+      security:
+        - api_key: [ ]
+      parameters: [ ]
+      responses:
+        200:
+          description: success
+        401:
+          description: unauthorized
+    post:
+      tags:
+        - course
+      security:
+        - api_key: [ ]
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Course'
+      responses:
+        200:
+          description: ok
+        405:
+          description: invalid input
   /appointments:
     post:
       tags:
@@ -578,6 +607,16 @@ definitions:
       avatarUrl:
         type: string
         format: uri
+  Course:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      title:
+        type: string
+      price:
+        type: number
   appointment:
     type: object
     properties:
