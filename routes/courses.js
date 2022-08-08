@@ -20,7 +20,16 @@ router.get('/', async (req, res, next) => {
 });
 
 router.put('/:courseId', async (req, res, next) => {
-  const course = await coursesController.findByIdAndUpdate(req.params.courseId, req.body)
+  let course = undefined
+  if(req.params.courseId && req.params.courseId != 'undefined') {
+    console.log('aa',req.params.courseId)
+    course = await coursesController.findByIdAndUpdate(req.params.courseId, req.body)
+  } else {
+    console.log('bb')
+    const data = req.body
+    data.tutor = req.user.id
+    course = await coursesController.create(data)
+  }
 
   api.ok(res, course)
 
