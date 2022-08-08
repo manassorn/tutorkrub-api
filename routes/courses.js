@@ -13,17 +13,17 @@ router.post('/', async (req, res, next) => {
 
 });
 
+router.get('/', async (req, res, next) => {
+  const courses = await coursesController.getListByOwner(req.user.id)
+
+  api.ok(res, courses)
+});
+
 router.put('/:courseId', async (req, res, next) => {
   const course = await coursesController.findByIdAndUpdate(req.params.courseId, req.body)
 
   api.ok(res, course)
 
-});
-
-router.get('/', async (req, res, next) => {
-  const courses = await coursesController.getListByOwner(req.user.id)
-
-  api.ok(res, courses)
 });
 
 router.get('/:id', async (req, res, next) => {

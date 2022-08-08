@@ -393,6 +393,25 @@ paths:
           description: ok
         405:
           description: invalid input
+  /courses/{courseId}:
+    put:
+      tags:
+        - course
+      security:
+        - api_key: [ ]
+      parameters:
+        - in: path
+          name: courseId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Course'
+      responses:
+        200:
+          description: ok
+        405:
+          description: invalid input
   /appointments:
     post:
       tags:
