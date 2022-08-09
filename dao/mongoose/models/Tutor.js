@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 
 const tutorSchema = new Schema({
   //_id: Schema.Types.ObjectId,
-  teachingSubjects: [{ type: String, required: true }],
-  teachingLevels: [{ type: String, required: true }],
+  teachSubjects: [{ type: String, required: true }],
+  teachLevels: [{ type: String, required: true }],
   additionalDetails: [{ type: String }],
   availability: {type: Schema.Types.Mixed},
   courses: [{type: Schema.Types.ObjectId, ref: 'Course'}],

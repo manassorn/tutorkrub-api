@@ -572,11 +572,11 @@ definitions:
         type: string
       krubId:
         type: string
-      teachingSubjects:
+      teachSubjects:
         type: array
         items:
           type: string
-      teachingLevels:
+      teachLevels:
         type: array
         items:
           type: string
@@ -661,11 +661,11 @@ definitions:
   TutorRegistration:
     type: object
     properties:
-      teachingSubjects:
+      teachSubjects:
         type: array
         items:
           type: string
-      teachingLevels:
+      teachLevels:
         type: array
         items:
           type: string
@@ -674,11 +674,11 @@ definitions:
   Tutor:
     type: object
     properties:
-      teachingSubjects:
+      teachSubjects:
         type: array
         items:
           type: string
-      teachingLevels:
+      teachLevels:
         type: array
         items:
           type: string
@@ -721,11 +721,11 @@ definitions:
         type: string
       avatarUrl:
         type: string
-      teachingSubjects:
+      teachSubjects:
         type: array
         items:
           type: string
-      teachingLevels:
+      teachLevels:
         type: array
         items:
           type: string

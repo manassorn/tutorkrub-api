@@ -17,7 +17,7 @@ class TutorDao extends BaseDao {
         .populate('user').exec()
 
     }
-    return await this.Model.find({ teachingSubjects: subject, teachingLevels: level})
+    return await this.Model.find({ teachSubjects: subject, teachLevels: level})
       .populate('user').exec()
   }
 

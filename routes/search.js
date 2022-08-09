@@ -18,8 +18,8 @@ router.get('/', async (req, res, next) => {
   const searches = tutors.map((t) => {
     return {
       id: t._id,
-      teachingSubjects: t.teachingSubjects,
-      teachingLevels: t.teachingLevels,
+      teachSubjects: t.teachSubjects,
+      teachLevels: t.teachLevels,
       availability: t.availability,
       krubId: t.user.krubId,
       avatarUrl: t.user.avatarUrl
@@ -32,8 +32,8 @@ function mapTutor(t) {
   //this should only return public data
   return {
     id: t._id,
-    teachingSubjects: t.teachingSubjects,
-    teachingLevels: t.teachingLevels,
+    teachSubjects: t.teachSubjects,
+    teachLevels: t.teachLevels,
     availability: t.availability,
     krubId: t.user.krubId,
     avatarUrl: t.user.avatarUrl
