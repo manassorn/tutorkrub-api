@@ -572,11 +572,11 @@ definitions:
         type: string
       krubId:
         type: string
-      tutorSubjects:
+      teachingSubjects:
         type: array
         items:
           type: string
-      tutorLevels:
+      teachingLevels:
         type: array
         items:
           type: string

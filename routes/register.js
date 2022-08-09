@@ -39,8 +39,8 @@ router.post('/tutor', async (req, res, next) => {
   const user = await userDao.create({krubId: req.body.krubId})
 
   await tutorDao.create({
-    tutorSubjects: req.body.tutorSubjects,
-    tutorLevels: req.body.tutorLevels,
+    teachingSubjects: req.body.teachingSubjects,
+    teachingLevels: req.body.teachingLevels,
     tutorPrice: req.body.tutorPrice,
     user: user.id
   })
