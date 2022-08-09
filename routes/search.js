@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
       id: t._id,
       teachingSubjects: t.teachingSubjects,
       teachingLevels: t.teachingLevels,
-      tutorPrice: t.tutorPrice,
+      availability: t.availability,
       krubId: t.user.krubId,
       avatarUrl: t.user.avatarUrl
     }
