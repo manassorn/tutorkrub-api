@@ -9,7 +9,7 @@ const courseDao = require('../dao/course.dao')
 router.get('/tutors', async (req, res, next) => {
   const subject = req.params.subject
   const level = req.params.level
-  const tutorId = req.query.tutorid
+  const tutorId = req.query.id
   if (tutorId) {
     const tutor = await tutorDao.get(tutorId)
     api.ok(res, [mapTutor(tutor)])
