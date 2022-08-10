@@ -503,7 +503,7 @@ paths:
       tags:
         - search
       parameters:
-        - name: tutorid
+        - name: id
           in: query
           type: string
         - name: subject

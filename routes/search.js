@@ -7,12 +7,12 @@ const courseDao = require('../dao/course.dao')
 
 
 router.get('/tutors', async (req, res, next) => {
-  const subject = req.params.subject
-  const level = req.params.level
+  const subject = req.query.subject
+  const level = req.query.level
   const tutorId = req.query.id
   if (tutorId) {
     const tutor = await tutorDao.get(tutorId)
-    api.ok(res, [mapTutor(tutor)])
+    api.ok(res, tutor?[mapTutor(tutor)]:[])
   } else {
 
     const tutors = await tutorDao.search(subject, level)
