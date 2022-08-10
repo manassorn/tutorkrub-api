@@ -498,7 +498,7 @@ paths:
           description: unauthorize
         403:
           description: forbidden
-  /search:
+  /search/tutors:
     get:
       tags:
         - search

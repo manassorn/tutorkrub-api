@@ -6,7 +6,7 @@ const tutorDao = require('../dao/tutor.dao')
 const courseDao = require('../dao/course.dao')
 
 
-router.get('/', async (req, res, next) => {
+router.get('/tutors', async (req, res, next) => {
   const subject = req.params.subject
   const level = req.params.level
   const tutorId = req.query.tutorid
