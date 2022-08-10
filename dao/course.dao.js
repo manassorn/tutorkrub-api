@@ -17,7 +17,7 @@ class CourseDao extends BaseDao {
   }
   
   async get(courseId) {
-    return await Course.findById(courseId).populate('tutor').exec()
+    return await Course.findById(courseId).exec()
   }
 }
 

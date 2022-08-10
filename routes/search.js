@@ -3,15 +3,16 @@ var router = express.Router();
 
 var api = require('./api')
 const tutorDao = require('../dao/tutor.dao')
+const courseDao = require('../dao/course.dao')
 
 
 router.get('/', async (req, res, next) => {
   const subject = req.params.subject
   const level = req.params.level
-  const tutorId = req.params.tutorid
+  const tutorId = req.query.tutorid
   if (tutorId) {
     const tutor = await tutorDao.get(tutorId)
-    api.ok(res, mapTutor(tutor))
+    api.ok(res, [mapTutor(tutor)])
   }
 
   const tutors = await tutorDao.search(subject, level)
@@ -39,5 +40,16 @@ function mapTutor(t) {
     avatarUrl: t.user.avatarUrl
   }
 }
+
+router.get('/courses', async (req, res, next) => {
+  const courseId = req.query.id
+  if (courseId) {
+    const course = await courseDao.get(courseId)
+    api.ok(res, [course])
+  }
+
+
+});
+
 
 module.exports = router;

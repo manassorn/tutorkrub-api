@@ -519,6 +519,21 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Search'
+  /search/courses:
+    get:
+      tags:
+        - search
+      parameters:
+        - name: id
+          in: query
+          type: string
+      responses:
+        200:
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Search'
 securityDefinitions:
   api_key:
     type: apiKey
