@@ -13,20 +13,22 @@ router.get('/tutors', async (req, res, next) => {
   if (tutorId) {
     const tutor = await tutorDao.get(tutorId)
     api.ok(res, [mapTutor(tutor)])
+  } else {
+
+    const tutors = await tutorDao.search(subject, level)
+    const searches = tutors.map((t) => {
+      return {
+        id: t._id,
+        teachSubjects: t.teachSubjects,
+        teachLevels: t.teachLevels,
+        availability: t.availability,
+        krubId: t.user.krubId,
+        avatarUrl: t.user.avatarUrl
+      }
+    })
+    api.ok(res, searches)
   }
 
-  const tutors = await tutorDao.search(subject, level)
-  const searches = tutors.map((t) => {
-    return {
-      id: t._id,
-      teachSubjects: t.teachSubjects,
-      teachLevels: t.teachLevels,
-      availability: t.availability,
-      krubId: t.user.krubId,
-      avatarUrl: t.user.avatarUrl
-    }
-  })
-  api.ok(res, searches)
 });
 
 function mapTutor(t) {
