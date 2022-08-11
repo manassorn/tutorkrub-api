@@ -6,7 +6,12 @@ class CourseDao extends BaseDao {
     super(Course)
   }
   
-  async getListByOwner(tutorId) {
+  async getListByOwner(userId) {
+    const courses = await Course.find({'user': userId}).exec()
+    return courses
+  }
+
+  async findByTutorId(tutorId) {
     const courses = await Course.find({'tutor': tutorId}).exec()
     return courses
   }

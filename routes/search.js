@@ -45,9 +45,14 @@ function mapTutor(t) {
 
 router.get('/courses', async (req, res, next) => {
   const courseId = req.query.id
+  const tutorId = req.query.tutorid
+
   if (courseId) {
     const course = await courseDao.get(courseId)
     api.ok(res, [course])
+  } else if(tutorId) {
+    const courses = await courseDao.findByTutorId(tutorId)
+    api.ok(res, courses)
   }
 
 

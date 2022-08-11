@@ -527,6 +527,9 @@ paths:
         - name: id
           in: query
           type: string
+        - name: tutorid
+          in: query
+          type: string
       responses:
         200:
           description: success
