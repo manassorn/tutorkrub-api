@@ -23,7 +23,8 @@ router.get('/tutors', async (req, res, next) => {
         teachLevels: t.teachLevels,
         availability: t.availability,
         krubId: t.user.krubId,
-        avatarUrl: t.user.avatarUrl
+        avatarUrl: t.user.avatarUrl,
+        name: t.user.name
       }
     })
     api.ok(res, searches)
@@ -39,7 +40,8 @@ function mapTutor(t) {
     teachLevels: t.teachLevels,
     availability: t.availability,
     krubId: t.user.krubId,
-    avatarUrl: t.user.avatarUrl
+    avatarUrl: t.user.avatarUrl,
+    name: t.user.name
   }
 }
 

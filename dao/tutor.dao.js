@@ -7,6 +7,10 @@ class TutorDao extends BaseDao {
     super(Tutor)
   }
 
+  async get(id) {
+    return await this.Model.findById(id).populate('user').exec()
+  }
+
   async findByUserIdAndUpdate(userId, update) {
     return await this.Model.findOneAndUpdate({userId}, update)
   }
