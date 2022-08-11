@@ -6,7 +6,7 @@ var coursesController = require('../controllers/courses.controller')
 
 router.post('/', async (req, res, next) => {
   const data = req.body
-  data.tutor = req.user.id
+  data.user = req.user.id
   const course = await coursesController.create(data)
 
   api.ok(res, course)
