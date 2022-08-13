@@ -16,9 +16,9 @@ router.post('/charges/promptpay/qrcode', async (req, res, next) => {
     'currency': 'thb', 
     'source': req.body.sourceId
   });
-  const qrUrl = resp.source.scannable_code.image.download_uri
+  const qrCodeUrl = resp.source.scannable_code.image.download_uri
 
-  api.ok(res, {qrUrl})
+  api.ok(res, {qrCodeUrl})
   } catch (err) {
     console.log(err)
   }
