@@ -3,7 +3,7 @@ var router = express.Router();
 
 var api = require('./api')
 var omise = require('omise')({ 
-  'secretKey': process.env.OMISE_SKEY, 
+  'secretKey': process.env.OMISE_SKEY || 'skey_test_5kscphkh4415xg2hrcf',
   'omiseVersion': '2017-11-02' 
 });
 
