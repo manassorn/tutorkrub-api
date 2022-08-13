@@ -12,7 +12,7 @@ router.post('/charges/promptpay/qrcode', async (req, res, next) => {
     console.log(req.body.sourceId)
   const resp = await omise.charges.create({ 
     'description': 'Charge for order ID: 888', 
-    'amount': req.body.amount, 
+    'amount': req.body.amount + '00',
     'currency': 'thb', 
     'source': req.body.sourceId
   });
