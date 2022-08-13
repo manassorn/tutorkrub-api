@@ -7,7 +7,7 @@ var omise = require('omise')({
   'omiseVersion': '2017-11-02' 
 });
 
-router.post('/charge/promptpay', async (req, res, next) => {
+router.post('/charges/promptpay/qrcode', async (req, res, next) => {
   try {
     console.log(req.body.sourceId)
   const resp = await omise.charges.create({ 
@@ -16,9 +16,9 @@ router.post('/charge/promptpay', async (req, res, next) => {
     'currency': 'thb', 
     'source': req.body.sourceId
   });
-  const qrUri = resp.source.scannable_code.image.download_uri
+  const qrUrl = resp.source.scannable_code.image.download_uri
 
-  api.ok(res, {qrUri})
+  api.ok(res, {qrUrl})
   } catch (err) {
     console.log(err)
   }
