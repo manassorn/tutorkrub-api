@@ -26,6 +26,8 @@ tags:
     description:
   - name: search
     description:
+  - name: omise
+    description:
 # schemes:
 # - http
 paths:
@@ -537,6 +539,34 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Search'
+  /omise/promptpay/qrcode:
+    post:
+      tags:
+        - omise
+      security:
+        - api_key: [ ]
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              courseId:
+                type: string
+              scheduleDate:
+                type: string
+              scheduleHour:
+                type: number
+              price:
+                type: number
+            example:
+              courseId: 62f1241aec23586e18f4234f
+              scheduleDate: 20220818
+              scheduleHour: 1
+              price: 110
+      responses:
+        200:
+          description: success
 securityDefinitions:
   api_key:
     type: apiKey
