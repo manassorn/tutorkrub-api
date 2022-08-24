@@ -44,7 +44,6 @@ router.post('/email', async () => {
 
 router.post('/login', async (req, res, next) => {
   const user = await authenController.login(req.body.email, req.body.password)
-  
   if (user) {
     const accessToken = generateJwtToken(res, user.id)
     if(process.env.ENV == 'dev') {

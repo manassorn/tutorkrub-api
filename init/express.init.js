@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var jwtMiddleware = require('../middlewares/jwt.middleware')
+var monitoring = require('../monitoring')
 
 var indexRouter = require('../routes/index');
 var authenRouter = require('../routes/authen');
@@ -92,5 +93,13 @@ app.set('json replacer', function(key, value) {
 
   return value;
 });
+
+app.use(errorHandler)
+
+function errorHandler(err, req, res, next) {
+  monitoring.log('error', `Error on Express ${req.method} ${req.originalUrl}`, err.stack)
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+}
 
 module.exports = app;

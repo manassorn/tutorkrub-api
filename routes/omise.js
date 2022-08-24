@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const api = require('./api')
+const asyncHandler = require('../async-handler')
 const paymentDao = require('../dao/payment.dao')
 
 var omise = require('omise')({
@@ -10,7 +11,7 @@ var omise = require('omise')({
   omiseVersion: '2017-11-02'
 });
 
-router.post('/promptpay/qrcode', async (req, res, next) => {
+router.post('/promptpay/qrcode', asyncHandler(async (req, res, next) => {
   const courseId = req.body.courseId
   const scheduleDate = req.body.scheduleDate
   const scheduleHour = req.body.scheduleHour
@@ -19,18 +20,14 @@ router.post('/promptpay/qrcode', async (req, res, next) => {
   if (payment.promptpayQRCodeUrl) {
     return api.ok(res, {qrCodeUrl: payment.promptpayQRCodeUrl })
   } else {
-    try {
-      const charge = await createPromptpayCharge(req.body.price)
-      const qrCodeUrl = charge.source.scannable_code.image.download_uri
+    const charge = await createPromptpayCharge(req.body.price)
+    const qrCodeUrl = charge.source.scannable_code.image.download_uri
 
-      payment.promptpayQRCodeUrl = qrCodeUrl
-      await payment.save()
-      api.ok(res, {qrCodeUrl})
-    } catch (err) {
-      console.log(err)
-    }
+    payment.promptpayQRCodeUrl = qrCodeUrl
+    await payment.save()
+    api.ok(res, {qrCodeUrl})
   }
-});
+}));
 
 async function createPaymentIfNotExists(userId, courseId, scheduleDate, scheduleHour) {
   const payment = await paymentDao.findPayment(userId, courseId, scheduleDate, scheduleHour)
@@ -63,7 +60,7 @@ async function createPromptpayCharge(amount) {
 router.post('/webhook', async (req, res, next) => {
   try {
     console.log(req.body)
-  api.ok(res)
+    api.ok(res)
   } catch (err) {
     console.log(err)
   }

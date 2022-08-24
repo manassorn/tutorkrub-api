@@ -2,11 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 var api = require('./api')
+var monitoring = require('../monitoring')
 const tutorDao = require('../dao/tutor.dao')
 const courseDao = require('../dao/course.dao')
 
 
 router.get('/tutors', async (req, res, next) => {
+  monitoring.log('info', `Requesting ${req.method} ${req.originalUrl}`, {tags: 'http', additionalInfo: {body: req.body, headers: req.headers }});
+
   const subject = req.query.subject
   const level = req.query.level
   const tutorId = req.query.id

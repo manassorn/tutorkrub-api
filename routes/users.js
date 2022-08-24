@@ -3,6 +3,7 @@ var router = express.Router();
 
 var api = require('./api')
 var usersController = require('../controllers/users.controller')
+var asyncHandler = require('../async-handler')
 
 var s3 = require('../services/s3.service')
 const multer = require('multer')
@@ -27,7 +28,7 @@ router.put('/me', async (req, res, next) => {
   api.responseOk(res)
 });
 
-router.get('/me', async (req, res, next) => {
+router.get('/me', asyncHandler(async (req, res, next) => {
   if(req.user.userId) {
     const user = await usersController.get(req.user.id)
 
@@ -35,7 +36,7 @@ router.get('/me', async (req, res, next) => {
   } else {
     api.responseErrorCode(res, 403, 'no auth')
   }
-});
+}));
 
 router.post('/me/availability', async (req, res, next) => {
  
