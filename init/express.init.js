@@ -97,8 +97,7 @@ app.set('json replacer', function(key, value) {
 app.use(errorHandler)
 
 function errorHandler(err, req, res, next) {
-  monitoring.log('error', `Error on Express ${req.method} ${req.originalUrl}`, err.stack)
-  console.error(err.stack)
+  monitoring.error(`Express error at root level on ${req.method} ${req.originalUrl} ${err.stack}`)
   res.status(500).send('Something broke!')
 }
 

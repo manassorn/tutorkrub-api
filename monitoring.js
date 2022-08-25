@@ -1,11 +1,16 @@
 const winston = require('winston'),
   WinstonCloudWatch = require('winston-cloudwatch');
 const monitoring = new winston.createLogger({
-  format: winston.format.json(),
+  // format: winston.format.combine(
+  //   winston.format.colorize(),
+  //   winston.format.printf(({ level, message}) =>    `[${level}] ${message}` )
+  // ),
   transports: [
     new (winston.transports.Console)({
-      timestamp: true,
-      colorize: true,
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.printf(({ level, message}) =>    `[${level}] ${message}` )
+      ),
     })
   ]
 });
@@ -20,7 +25,7 @@ const monitoring = new winston.createLogger({
       },
       region: 'ap-southeast-1',
     },
-    messageFormatter: ({ level, message, additionalInfo }) =>    `[${level}] : ${message} \nAdditional Info: ${JSON.stringify(additionalInfo)}}`
+    messageFormatter: ({ level, message}) =>    `[${level}] ${message}`
   }
   monitoring.add(new WinstonCloudWatch(cloudwatchConfig))
 // }
