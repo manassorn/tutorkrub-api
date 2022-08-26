@@ -13,36 +13,19 @@ var omise = require('omise')({
 
 router.post('/promptpay/qrcode', asyncHandler(async (req, res, next) => {
   req.clearTimeout(); // clear request timeout
-  req.setTimeout(5000); //set a 3s timeout for this request
-  const courseId = req.body.courseId
-  const scheduleDate = req.body.scheduleDate
-  const scheduleHour = req.body.scheduleHour
-  const userId = req.user.id
-  let payment = await createPaymentIfNotExists(userId, courseId, scheduleDate, scheduleHour)
+  req.setTimeout(5000); //set a 5s timeout for this request
+  const payment = await paymentDao.get(req.body.paymentId)
+  const amount = payment.amount
   if (payment.promptpayQRCodeUrl) {
-    api.ok(res, {qrCodeUrl: payment.promptpayQRCodeUrl })
+    api.ok(res, { promptpayQRCodeUrl: payment.promptpayQRCodeUrl })
   } else {
-    const charge = await createPromptpayCharge(req.body.amount)
-    const qrCodeUrl = charge.source.scannable_code.image.download_uri
-
-    payment.promptpayQRCodeUrl = qrCodeUrl
+    const charge = await createPromptpayCharge(amount)
+    const promptpayQRCodeUrl = charge.source.scannable_code.image.download_uri
+    payment.promptpayQRCodeUrl = promptpayQRCodeUrl
     await payment.save()
-    api.ok(res, {qrCodeUrl})
+    api.ok(res, { promptpayQRCodeUrl })
   }
 }));
-
-async function createPaymentIfNotExists(userId, courseId, scheduleDate, scheduleHour) {
-  const payment = await paymentDao.findPayment(userId, courseId, scheduleDate, scheduleHour)
-  if (payment) {
-    return payment
-  }
-  return await paymentDao.create({
-    user: userId,
-    course: courseId,
-    scheduleDate,
-    scheduleHour
-  })
-}
 
 async function createPromptpayCharge(amount) {
   const source = await omise.sources.create({
@@ -50,15 +33,13 @@ async function createPromptpayCharge(amount) {
     currency: 'THB',
     type: 'promptpay'
   })
-  console.log('aa',source.id)
-  const resp = await omise.charges.create({
+  const charge = await omise.charges.create({
     'description': 'Charge for order ID: 999',
     'amount': amount * 100,
     'currency': 'THB',
     'source': source.id,
   });
-  console.log('aa1')
-  return resp
+  return charge
 }
 
 router.post('/webhook', async (req, res, next) => {

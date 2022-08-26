@@ -564,7 +564,7 @@ paths:
             example:
               courseId: 62f1241aec23586e18f4234f
               price: 110
-              scheduleDate: 20220818
+              scheduleDate: 2022-08-18
               scheduleHour: 1
       responses:
         200:

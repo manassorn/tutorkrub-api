@@ -23,7 +23,7 @@ class PaymentDao extends BaseDao {
       scheduleHour
     }
     const query = data
-    return Payment.findOneAndUpdate(query, data, {upsert: true});
+    return await Payment.findOneAndUpdate(query, data, {upsert: true, new: true}).exec();
   }
 }
 
