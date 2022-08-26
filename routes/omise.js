@@ -12,15 +12,17 @@ var omise = require('omise')({
 });
 
 router.post('/promptpay/qrcode', asyncHandler(async (req, res, next) => {
+  req.clearTimeout(); // clear request timeout
+  req.setTimeout(5000); //set a 3s timeout for this request
   const courseId = req.body.courseId
   const scheduleDate = req.body.scheduleDate
   const scheduleHour = req.body.scheduleHour
   const userId = req.user.id
   let payment = await createPaymentIfNotExists(userId, courseId, scheduleDate, scheduleHour)
   if (payment.promptpayQRCodeUrl) {
-    return api.ok(res, {qrCodeUrl: payment.promptpayQRCodeUrl })
+    api.ok(res, {qrCodeUrl: payment.promptpayQRCodeUrl })
   } else {
-    const charge = await createPromptpayCharge(req.body.price)
+    const charge = await createPromptpayCharge(req.body.amount)
     const qrCodeUrl = charge.source.scannable_code.image.download_uri
 
     payment.promptpayQRCodeUrl = qrCodeUrl
@@ -44,16 +46,18 @@ async function createPaymentIfNotExists(userId, courseId, scheduleDate, schedule
 
 async function createPromptpayCharge(amount) {
   const source = await omise.sources.create({
-    amount: amount+ '00',
+    amount: amount * 100,
     currency: 'THB',
     type: 'promptpay'
   })
+  console.log('aa',source.id)
   const resp = await omise.charges.create({
     'description': 'Charge for order ID: 999',
-    'amount': amount + '00',
+    'amount': amount * 100,
     'currency': 'THB',
     'source': source.id,
   });
+  console.log('aa1')
   return resp
 }
 

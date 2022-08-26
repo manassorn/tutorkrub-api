@@ -8,7 +8,7 @@ const paymentSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User', localField: 'studentId' },
   status: { type: String, enum:['pending','paid'], default: 'pending'},
   promptpayQRCodeUrl: { type: String },
-
+  appointment: { type: Schema.Types.ObjectId, ref: 'Appointment' }
 });
 
 const Payment = mongoose.model('Payment', paymentSchema);

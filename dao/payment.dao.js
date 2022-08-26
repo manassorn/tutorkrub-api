@@ -14,6 +14,17 @@ class PaymentDao extends BaseDao {
       user: userId,
     })
   }
+  async createIfNotExists(userId, courseId, amount, scheduleDate, scheduleHour) {
+    const data = {
+      user: userId,
+      course: courseId,
+      amount,
+      scheduleDate,
+      scheduleHour
+    }
+    const query = data
+    return Payment.findOneAndUpdate(query, data, {upsert: true});
+  }
 }
 
 const paymentDao = new PaymentDao()

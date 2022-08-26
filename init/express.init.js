@@ -6,6 +6,7 @@ const cors = require('cors');
 var cookieParser = require('cookie-parser');
 // var session = require('express-session');
 var bodyParser = require('body-parser');
+var timeout = require('connect-timeout')
 var logger = require('morgan');
 
 var jwtMiddleware = require('../middlewares/jwt.middleware')
@@ -17,6 +18,7 @@ var usersRouter = require('../routes/users');
 var tutorsRouter = require('../routes/tutors');
 var uploadRouter = require('../routes/upload');
 var payRouter = require('../routes/pay');
+var paymentsRouter = require('../routes/payments');
 var coursesRouter = require('../routes/courses');
 var appointmentsRouter = require('../routes/appointments');
 var registerRouter = require('../routes/register');
@@ -36,6 +38,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors({exposedHeaders:'accessTokenDev'}))
 app.options('*', cors({exposedHeaders:'accessTokenDev'}))
 
+app.use(timeout('1s'));
 app.use(logger('dev'));
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
@@ -66,9 +69,9 @@ app.use('/', indexRouter);
 app.use('/api/authen', authenRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/tutors', jwtMiddleware.checkLogin, tutorsRouter);
-//app.use('/api/crud', crudRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/pay', payRouter);
+app.use('/api/payments', paymentsRouter);
 
 app.use('/api/courses', jwtMiddleware.checkLogin, coursesRouter);
 app.use('/api/appointments', jwtMiddleware.checkLogin, appointmentsRouter);
@@ -97,7 +100,15 @@ app.set('json replacer', function(key, value) {
 app.use(errorHandler)
 
 function errorHandler(err, req, res, next) {
-  monitoring.error(`Express error at root level on ${req.method} ${req.originalUrl} ${err.stack}`)
+  let details = ""
+  if (err instanceof Error) {
+    details = err.stack
+  } else if(typeof err === 'object') {
+    details = JSON.stringify(err, null, 4) // beautiful indented output.
+  } else {
+    details = err
+  }
+  monitoring.error(`Express error at root level on ${req.method} ${req.originalUrl} ${details}`)
   res.status(500).send('Something broke!')
 }
 
