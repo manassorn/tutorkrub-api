@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var api = require('./api')
-const loginAccountDao = require('../dao/LoginAccountDao')
+const loginAccountDao = require('../dao/loginAccount.dao')
 const userDao = require('../dao/user.dao')
 const tutorDao = require('../dao/tutor.dao')
 const {ERROR_EMAIL_ALREADY_EXISTS, ERROR_KRUBID_ALREADY_EXISTS} = require('../errors')

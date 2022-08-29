@@ -14,12 +14,13 @@ var omise = require('omise')({
 router.post('/promptpay/qrcode', asyncHandler(async (req, res, next) => {
   req.clearTimeout(); // clear request timeout
   req.setTimeout(5000); //set a 5s timeout for this request
-  const payment = await paymentDao.get(req.body.paymentId)
+  const paymentId = req.body.paymentId
+  const payment = await paymentDao.get(paymentId)
   const amount = payment.amount
   if (payment.promptpayQRCodeUrl) {
     api.ok(res, { promptpayQRCodeUrl: payment.promptpayQRCodeUrl })
   } else {
-    const charge = await createPromptpayCharge(amount)
+    const charge = await createPromptpayCharge(paymentId, amount)
     const promptpayQRCodeUrl = charge.source.scannable_code.image.download_uri
     payment.promptpayQRCodeUrl = promptpayQRCodeUrl
     await payment.save()
@@ -27,17 +28,20 @@ router.post('/promptpay/qrcode', asyncHandler(async (req, res, next) => {
   }
 }));
 
-async function createPromptpayCharge(amount) {
+async function createPromptpayCharge(paymentId, amount) {
   const source = await omise.sources.create({
     amount: amount * 100,
     currency: 'THB',
     type: 'promptpay'
   })
   const charge = await omise.charges.create({
-    'description': 'Charge for order ID: 999',
+    'description': 'Payment ID: ' + paymentId, //todo - change to sth more meaningful
     'amount': amount * 100,
     'currency': 'THB',
     'source': source.id,
+    'metadata': {
+      'paymentId': paymentId
+    }
   });
   return charge
 }
@@ -45,6 +49,13 @@ async function createPromptpayCharge(amount) {
 router.post('/webhook', async (req, res, next) => {
   try {
     console.log(req.body)
+    const event = req.body
+    const paymentId = event.data.metadata.paymentId
+    const update = {$push: {'omiseEvents': event}}
+    if(event.data.paid === true) {
+      update.status = 'paid'
+    }
+    await paymentDao.findByIdAndUpdate(paymentId, update)
     api.ok(res)
   } catch (err) {
     console.log(err)
@@ -52,14 +63,6 @@ router.post('/webhook', async (req, res, next) => {
 
 });
 
-router.get('/webhook', async (req, res, next) => {
-  try {
-  api.ok(res, 'ok')
-  } catch (err) {
-    console.log(err)
-  }
-
-});
 
 
 module.exports = router

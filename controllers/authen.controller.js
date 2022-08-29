@@ -1,4 +1,4 @@
-var loginAccountDao = require('../dao/LoginAccountDao')
+var loginAccountDao = require('../dao/loginAccount.dao')
 
 
 module.exports.login = async (email, pwd) => {
