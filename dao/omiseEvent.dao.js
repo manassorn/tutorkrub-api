@@ -8,5 +8,5 @@ class OmiseEventDao extends BaseDao {
 
 }
 
-const OmiseEventDao = new OmiseEventDao()
-module.exports = OmiseEventDao
+const omiseEventDao = new OmiseEventDao()
+module.exports = omiseEventDao
