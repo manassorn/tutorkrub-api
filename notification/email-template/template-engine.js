@@ -1,30 +1,31 @@
-var Handlebars = require('handlebars')
-var fs = require('fs');
+const Handlebars = require('handlebars')
+const fs = require('fs');
+const path = require('path')
 
-var partialsDir = __dirname + './partials';
+const partialsDir = path.join(__dirname, './partials');
 
-var filenames = fs.readdirSync(partialsDir);
+let filenames = fs.readdirSync(partialsDir);
 filenames.forEach(function (filename) {
-  var matches = /^([^.]+).hbs$/.exec(filename);
+  const matches = /^([^.]+).hbs$/.exec(filename);
   if (!matches) {
     return;
   }
-  var name = matches[1];
-  var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
+  const name = matches[1];
+  const template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
   Handlebars.registerPartial(name, template);
 });
 
-var compiledTemplates = {}
-var templatesDir = __dirname + './templates';
+const compiledTemplates = {}
+const templatesDir = path.join(__dirname, './templates');
 filenames = fs.readdirSync(templatesDir);
 filenames.forEach(function (filename) {
-  var matches = /^([^.]+).hbs$/.exec(filename);
+  const matches = /^([^.]+).hbs$/.exec(filename);
   if (!matches) {
     return;
   }
-  var name = matches[1];
-  var source = fs.readFileSync(templatesDir + '/' + filename, 'utf8');
-  var template = Handlebars.compile(source)
+  const name = matches[1];
+  const source = fs.readFileSync(templatesDir + '/' + filename, 'utf8');
+  const template = Handlebars.compile(source)
   compiledTemplates[name] = template
 });
 

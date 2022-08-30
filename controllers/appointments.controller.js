@@ -1,9 +1,9 @@
 const DaoController = require('./dao.controller')
-const appointmentsDao = require('../dao/appointments.dao')
+const appointmentDao = require('../dao/appointment.dao')
 
 class AppointmentsController extends DaoController {
   constructor() {
-    super(appointmentsDao)
+    super(appointmentDao)
   }
 
   async findByAttendee(userId) {

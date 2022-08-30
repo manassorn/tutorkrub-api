@@ -10,7 +10,6 @@ const paymentSchema = new Schema({
   status: { type: String, enum:['pending','paid'], default: 'pending'},
   promptpayQRCodeUrl: { type: String },
   appointment: { type: Schema.Types.ObjectId, ref: 'Appointment' },
-  omiseEvents: [{ type: Schema.Types.Mixed }]
 }, {
   toJSON: {virtuals: true}
 });
