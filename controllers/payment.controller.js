@@ -3,7 +3,7 @@ const appointmentDao = require('../dao/appointment.dao')
 const notificationCenter = require('../notification/notification-center')
 
 module.exports.updateToPaid = async (paymentId) => {
-  const payment = paymentDao.get(paymentId)
+  let payment = paymentDao.get(paymentId)
   payment.status = 'paid'
   await payment.save()
 
@@ -14,8 +14,11 @@ module.exports.updateToPaid = async (paymentId) => {
     scheduleDate: payment.scheduleDate,
     scheduleHour: payment.scheduleHour,
     tutor,
-    student,
-    payment: paymentId
+    student
   })
-  notificationCenter.whenAppointmentCreated(tutor, student, appointment)
+
+  payment.appointment = appointment._id
+  await payment.save()
+
+  notificationCenter.onAppointmentCreated(tutor, student, appointment)
 }

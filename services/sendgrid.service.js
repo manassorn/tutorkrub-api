@@ -2,13 +2,15 @@ const sgMail = require('@sendgrid/mail');
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-module.exports.send = async (to,subject,text) => {
+module.exports.send = async (to,subject,html) => {
   const msg = {
     to: to,
-    // from: 'notifications@tutorkrub.com', // Use the email address or domain you verified above
-    from: 'hello@hiscoretutor.com', // Use the email address or domain you verified above
+    from: {
+      email: 'notification@tutorkrub.com',
+      name: 'TutorKrub'
+    },
     subject: subject,
-    text: text,
+    html: html,
   };
   try {
     await sgMail.send(msg);

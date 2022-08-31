@@ -8,7 +8,6 @@ const appointmentSchema = new Schema({
   student: { type: Schema.Types.ObjectId, ref: 'User', localField: 'studentId' },
   tutor: { type: Schema.Types.ObjectId, ref: 'User', localField: 'tutorId' },
   status: {type: String, default: 'newlycreated'},
-  payment: { type: Schema.Types.ObjectId, ref: 'Payment' },
   messages: [{ from: Schema.Types.ObjectId, timestamp:Date, text: String }],
   histories: [{ type: String }]
 });
