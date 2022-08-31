@@ -5,6 +5,7 @@ const api = require('./api')
 const asyncHandler = require('../async-handler')
 const paymentDao = require('../dao/payment.dao')
 const omiseEventDao = require('../dao/omiseEvent.dao')
+const paymentControler = require('../controllers/payment.controller')
 
 var omise = require('omise')({
   publicKey:    process.env.OMISE_PUBLIC_KEY,
@@ -52,9 +53,7 @@ router.post('/webhook', asyncHandler(async (req, res, next) => {
   const event = req.body
   const paymentId = event.data.metadata.paymentId
   await omiseEventDao.create({payment: paymentId, event})
-  if(event.data.paid === true) {
-    update.status = 'paid'
-  }
+  await paymentControler.updateToPaid(paymentId)
   api.ok(res)
 }));
 
