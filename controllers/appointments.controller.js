@@ -1,14 +1,11 @@
-const DaoController = require('./dao.controller')
 const appointmentDao = require('../dao/appointment.dao')
+const STATUSES = appointmentDao.STATUSES
 
-class AppointmentsController extends DaoController {
-  constructor() {
-    super(appointmentDao)
-  }
-
-  async findByAttendee(userId) {
-    return await this.dao.findByAttendee(userId)
-  }
+module.exports.findActionNeeded = (userId) => {
+  appointmentDao.find({
+    $or: [
+      {tutor: userId, status: STATUSES.ACCEPTANCE_PENDING},
+      {student: userId, status: STATUSES.LESSON_COMPLETED}
+    ]
+  })
 }
-
-module.exports = appointmentsController = new AppointmentsController()

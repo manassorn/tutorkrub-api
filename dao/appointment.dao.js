@@ -16,3 +16,9 @@ class AppointmentDao extends BaseDao {
 
 const appointmentDao = new AppointmentDao()
 module.exports = appointmentDao
+
+module.exports.STATUSES = {
+  ACCEPTANCE_PENDING: 'acceptance_pending',
+  APPOINTMENT_ACCEPTED: 'appointment_accepted',
+  LESSON_COMPLETED: 'lesson_completed'
+}

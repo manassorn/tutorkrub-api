@@ -4,6 +4,16 @@ var router = express.Router();
 var api = require('./api')
 var appointmentsController = require('../controllers/appointments.controller')
 
+
+
+router.get('/action-needed', async (req, res, next) => {
+    var userId = req.user.id
+
+    const appointments = await appointmentsController.findByAttendee(userId)
+    api.responseOk(res, appointments)
+
+})
+
 // router.get('/:appointmentId/message', async (req, res, next) => {
 //   // todo - check weather user is tutor or student
 //   const appointmentId = req.params.appointmentId
@@ -52,14 +62,6 @@ var appointmentsController = require('../controllers/appointments.controller')
 //   api.responseOk(res, appointment2)
 //
 // });
-//
-// router.get('/', async (req, res, next) => {
-//   var userId = req.user.id
-//
-//   const appointments = await appointmentsController.findByAttendee(userId)
-//     api.responseOk(res, appointments)
-//
-// })
 
 
 
