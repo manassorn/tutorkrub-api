@@ -8,8 +8,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var timeout = require('connect-timeout')
 var logger = require('morgan');
+var responseTime = require('response-time')
 
 var jwtMiddleware = require('../middlewares/jwt.middleware')
+var monitoringMiddleware = require('../middlewares/monitoring.middleware')
 var monitoring = require('../monitoring')
 
 var indexRouter = require('../routes/index');
@@ -40,6 +42,7 @@ app.options('*', cors({exposedHeaders:'accessTokenDev'}))
 
 app.use(timeout('1s'));
 app.use(logger('dev'));
+app.use(responseTime(monitoringMiddleware.logResponseTime))
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.multipart());
