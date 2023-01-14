@@ -300,6 +300,20 @@ paths:
       responses:
         200:
           description: ok
+  /admin/tutor:
+    post:
+      tags:
+        - tutor
+      security:
+        - api_key: [ ]
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TutorRegistration'
+      responses:
+        200:
+          description: ok
   /tutors/educations:
     put:
       tags:

@@ -21,11 +21,11 @@ module.exports.logResponseTime = (req, res, time) => {
       .tag('status_code', res.statusCode)
       .floatField('response_time', time)
 
-    writeApi.writePoint(point1)
-
-    writeApi.close().then(() => {
-      console.log('WRITE FINISHED')
-    })
+    // writeApi.writePoint(point1)
+    //
+    // writeApi.close().then(() => {
+    //   console.log('WRITE FINISHED')
+    // })
   } catch (e) {
     console.log(e)
   }

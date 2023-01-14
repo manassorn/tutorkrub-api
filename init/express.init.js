@@ -17,6 +17,7 @@ var monitoring = require('../monitoring')
 var indexRouter = require('../routes/index');
 var authenRouter = require('../routes/authen');
 var usersRouter = require('../routes/users');
+var adminRouter = require('../routes/admin');
 var tutorsRouter = require('../routes/tutors');
 var uploadRouter = require('../routes/upload');
 var payRouter = require('../routes/pay');
@@ -71,6 +72,7 @@ app.use(jwtMiddleware.extractUser);
 app.use('/', indexRouter);
 app.use('/api/authen', authenRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/admin', adminRouter);
 app.use('/api/tutors', jwtMiddleware.checkLogin, tutorsRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/pay', payRouter);
