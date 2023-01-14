@@ -36,7 +36,8 @@ router.get('/tutors', async (req, res, next) => {
           availability: t.availability,
           krubId: undefined,
           avatarUrl: undefined,
-          name: t.name
+          name: t.name,
+          fbPostURL: t.fbPostURL
         }
       }
     })
